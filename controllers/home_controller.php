@@ -7,7 +7,7 @@ class home {
 		// Instantiate the admin
 	
 		// Include view
-		include 'views/user_login_view.php';
+		include 'views/index_login_view.php';
 	}
 
 	public function login() {

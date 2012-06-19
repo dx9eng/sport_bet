@@ -3,7 +3,7 @@
 <head>
 <title>Sport bettings - admin</title>
 <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-<link rel="stylesheet" type="text/css" href="../css/288433.css" />
+<link rel="stylesheet" type="text/css" href="/sport_bet/css/288433.css" />
 </head>
 <body>
   <div id="wrapper">
@@ -24,6 +24,9 @@
     <!-- Content -->
     <div id="contentwrap">
       <div id="content">
+        <p>
+          <h1>Admin content sample</h1>
+        </p>
       </div>
     </div>
     <!-- Content end -->

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Sport bettings</title>
+<title>Sport bettings - user</title>
 <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 <link rel="stylesheet" type="text/css" href="/sport_bet/css/288433.css" />
 </head>
@@ -24,6 +24,10 @@
     <!-- Content -->
     <div id="contentwrap">
       <div id="content">
+        <p>
+          <h1>Content</h1>
+          User test sample.
+        </p>
       </div>
     </div>
     <!-- Content end -->
