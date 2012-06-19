@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 // Split request
 $controller = isset($_GET['page']) ? $_GET['page'] : 'home';

@@ -5,7 +5,7 @@
 			    <fieldset>
 			     <legend>Please Log In To Continue</legend>
 			       <label>Username
-			         <input type="text" name="usermail" maxlength="75" />
+			         <input type="text" name="useremail" maxlength="75" />
 			       </label>
 			      <label>Password
 			    <input type="password" name="password" maxlength="150" />
