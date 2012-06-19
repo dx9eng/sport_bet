@@ -9,15 +9,23 @@ class user {
 		$user_model = new UserModel;
 
 		// Retrieve login
-		if ($_SERVER['REQUEST_METHOD'] == 'POST'
-			&& $_POST['action'] == 'login'
-			&& !empty($_POST['usermail'])
-			&& !empty($_POST['password'])) {
-			$user = $user_model->login();
-		}
+		
 
 		// Include view
 		include 'views/user_login_view.php';
+	}
+
+	public function login() {
+	  if ($_SERVER['REQUEST_METHOD'] == 'POST'
+			&& $_POST['action'] == 'login'
+			&& !empty($_POST['usermail'])
+			&& !empty($_POST['password'])) {
+				
+			$user = $user_model->login();
+		}	
+	   else {
+	   	
+	   }	
 	}
 }
 
