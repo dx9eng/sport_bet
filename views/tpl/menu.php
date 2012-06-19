@@ -10,7 +10,7 @@
 	elseif (isset($_SESSION['user'])) {
 		?>
 		<a href="#">Home</a>
-		<a href="#">Personal Profile</a>
+		<a href="/sport_bet/user/personalProfile">Personal Profile</a>
 		<a href="#">Bets</a>
 		<?php
 	}
