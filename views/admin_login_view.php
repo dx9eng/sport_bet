@@ -24,9 +24,19 @@
     <!-- Content -->
     <div id="contentwrap">
       <div id="content">
-        <p>
-          <h1>Admin content sample</h1>
-        </p>
+        <?php if (isset($_SESSION['admin'])) {
+          ?>
+          <p>
+            <h1>Admin</h1>
+            Admin test sample.
+          </p>
+          <?php }
+          elseif (isset($_SESSION['user'])) {
+            header('Location: /sport_bet/user/');
+          }
+          else {
+            header('Location: /sport_bet/home/');
+          } ?>
       </div>
     </div>
     <!-- Content end -->

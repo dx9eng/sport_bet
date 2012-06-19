@@ -25,8 +25,30 @@
     <div id="contentwrap">
       <div id="content">
         <p>
-          <h1>Home content sample</h1>
-        </p>
+        <?php if (isset($_SESSION['admin'])) {
+          header('Location: /sport_bet/admin/');
+        }
+        elseif (isset($_SESSION['user'])) {
+          header('Location: /sport_bet/user/');
+        }
+        else {
+          ?>
+          <!-- Home content-->
+          <p>
+            <h1>Last match results</h1>
+          </p>
+          <div>
+            <?php foreach ($matches as $m) : ?>
+              <p>
+                <?php echo $m['team1'] ?>
+                <?php echo $m['score_team1'] ?>
+                <?php echo $m['score_team2'] ?>
+                <?php echo $m['team2'] ?>
+              </p>
+          <?php endforeach ?>
+          </div>
+          <!-- Home content end-->
+        <?php } ?>
       </div>
     </div>
     <!-- Content end -->

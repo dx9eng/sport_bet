@@ -27,6 +27,7 @@ p {
     border-radius: 10px;
     border: 1px solid #eb521f;
     margin: 5px;
+    text-align: right;
 }
 
 #navigationwrap {
@@ -41,6 +42,7 @@ p {
     border-radius: 10px;
     border: 1px solid #ebb81f;
     margin: 5px;
+    text-align: center;
 }
 
 #contentwrap {
@@ -67,6 +69,7 @@ p {
     border-radius: 10px;
     border: 1px solid #53bcc7;
     margin: 5px;
+    text-align: center;
 }
 
 #footerwrap {
@@ -82,5 +85,6 @@ p {
     border-radius: 10px;
     border: 1px solid #1feb52;
     margin: 5px;
+    text-align: center;
 }
 
