@@ -1,0 +1,7 @@
+RewriteEngine on
+RewriteBase /sport_bet/
+
+RewriteRule \.(gif|jpg|png|css|ico|swf|js|inc\.php|php)$ - [L]
+RewriteRule ^(\w+)/?$ index.php?page=$1
+RewriteRule ^(\w+)/([\w-]+)/?$ index.php?page=$1&action=$2
+RewriteRule ^(\w+)/([\w-]+)/([\w-\/]+)? index.php?page=$1&action=$2&params=$3
