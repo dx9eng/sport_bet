@@ -5,8 +5,8 @@ class user {
 	public function index($params) {
 
 		// Instantiate the admin
-		include_once 'models/admin_model.php';
-		$user_model = new UserModel;
+		//include_once 'models/admin_model.php';
+		//$user_model = new UserModel;
 
 		// Retrieve login
 		if ($_SERVER['REQUEST_METHOD'] == 'POST'
