@@ -15,7 +15,6 @@ class user {
 		include 'views/user_login_view.php';
 	}
 
-	
 }
 
 ?>
