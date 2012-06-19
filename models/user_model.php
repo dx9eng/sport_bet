@@ -9,18 +9,21 @@ class UserModel {
 	}
 
 	public function login() {
-		$sql = "SELECT COUNT(*) AS num_users FROM admin WHERE username=? AND password=SHA1(?)";
+		$sql = "SELECT account_type,COUNT(*) AS num_users FROM user WHERE email=? AND password=?";
 		$stmt = $this->db->prepare($sql);
-		$stmt->execute(array($_POST['username'], $_POST['password']));
+		$stmt->execute(array($_POST['usermail'], $_POST['password']));
 		$response = $stmt->fetch();
-		if ($response['num_users'] > 0) {
-			$_SESSION['loggedin'] = 1;
+		if ($response['num_users'] > 0 && $response['account_type']==0) {
+			$_SESSION['admin'] = $_POST['usermail'];
+			header('Location: /sport_bet/admin/');
+		   exit;
 		}
 		else {
-			$_SESSION['loggedin'] = NULL;
+			$_SESSION['user'] = $_POST['usermail'];
+			header('Location: /sport_bet/user/');
+		   exit;
 		}
-		header('Location: /sport_bet/admin/');
-		exit;
+		
 	}
 
 }

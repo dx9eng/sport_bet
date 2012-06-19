@@ -1,7 +1,7 @@
 <?php
 
 // Split request
-$controller = isset($_GET['page']) ? $_GET['page'] : 'user';
+$controller = isset($_GET['page']) ? $_GET['page'] : 'home';
 $action = isset($_GET['action']) ? $_GET['action'] : 'index';
 $params = isset($_GET['params']) ? explode('/', $_GET['params']) : array();
 

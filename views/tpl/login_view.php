@@ -1,11 +1,11 @@
 <title> Please Log In </title>
 			</head>
 			<body>
-			  <form method="post" action="/sport_bet/user/login" enctype="multipart/form-data">
+			  <form method="post" action="/sport_bet/home/user" enctype="multipart/form-data">
 			    <fieldset>
 			     <legend>Please Log In To Continue</legend>
 			       <label>Username
-			         <input type="text" name="username" maxlength="75" />
+			         <input type="text" name="usermail" maxlength="75" />
 			       </label>
 			      <label>Password
 			    <input type="password" name="password" maxlength="150" />
