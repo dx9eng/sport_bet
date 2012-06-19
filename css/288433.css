@@ -1,0 +1,86 @@
+@import url("reset.css");
+
+body {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color:#333
+}
+
+p {
+    padding: 10px;
+}
+
+#wrapper {
+    margin: 0 auto;
+    width: 1000px;
+}
+
+#headerwrap {
+    width: 1000px;
+    float: left;
+    margin: 0 auto;
+}
+
+#header {
+    height: 100px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    border: 1px solid #eb521f;
+    margin: 5px;
+}
+
+#navigationwrap {
+    width: 1000px;
+    float: left;
+    margin: 0 auto;
+}
+
+#navigation {
+    height: 30px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    border: 1px solid #ebb81f;
+    margin: 5px;
+}
+
+#contentwrap {
+    width: 750px;
+    float: left;
+    margin: 0 auto;
+}
+
+#content {
+    background: #FFFFFF;
+    border-radius: 10px;
+    border: 1px solid #ebebeb;
+    margin: 5px;
+}
+
+#rightcolumnwrap {
+    width: 250px;
+    float: left;
+    margin: 0 auto;
+}
+
+#rightcolumn {
+    background: #FFFFFF;
+    border-radius: 10px;
+    border: 1px solid #53bcc7;
+    margin: 5px;
+}
+
+#footerwrap {
+    width: 1000px;
+    float: left;
+    margin: 0 auto;
+    clear: both;
+}
+
+#footer {
+    height: 50px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    border: 1px solid #1feb52;
+    margin: 5px;
+}
+
