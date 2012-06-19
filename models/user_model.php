@@ -9,6 +9,30 @@ class UserModel {
 		$this->db = new PDO(DB_INFO, DB_USER, DB_PASS);
 	}
 
+
+	public function getUserData() {
+		$sql = "SELECT id_user,name,address,password FROM user WHERE email=?";
+		$stmt = $this->db->prepare($sql);
+		$stmt->execute(array($_SESSION['user']));
+		$response = $stmt->fetch();
+		return $response;
+		
+	}
+
+
+	public function updateData($p) {
+		if($p['email'] != $_SESSION['user']) {
+			$_SESSION['user'] = $p['email'];
+		}
+	  $sql = "UPDATE user
+              SET name=?,address=?,email=?
+              WHERE id_user=?";
+      	$stmt = $this->db->prepare($sql);
+		$stmt->execute(array($p['name'],$p['address'],$p['email'],$p['id_user']));
+		$response = $stmt->fetch();  
+
+	}
+
 	public function loginUser($_POSTs) {
 
 		
