@@ -1,7 +1,7 @@
 <title> Please Log In </title>
 			</head>
 			<body>
-			  <form method="post" action="/sport_bet/home/user" enctype="multipart/form-data">
+			  <form method="post" action="/sport_bet/home/login" enctype="multipart/form-data">
 			    <fieldset>
 			     <legend>Please Log In To Continue</legend>
 			       <label>Username

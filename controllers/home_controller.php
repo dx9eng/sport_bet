@@ -21,21 +21,21 @@ class home {
 	}
 
 	public function login() {
-		include_once 'models/home_model.php';
-		$home_model = new HomeModel;
+		include_once 'models/user_model.php';
+		$user_model = new UserModel;
 	  if ($_SERVER['REQUEST_METHOD'] == 'POST'
 			&& $_POST['action'] == 'login'
 			&& !empty($_POST['usermail'])
 			&& !empty($_POST['password'])) {
 				
-			$home = $home_model->login();
+			$user = $user_model->login();
 		}	
 	   else {
 	   	  include_once 'views/index_login_view.php';
 	   }	
 	}
 
-	
+
 }
 
 ?>
