@@ -12,6 +12,8 @@
 		<input type="submit" name="submit" value="Log In" />
 	</fieldset>
 	<?php
+	if (isset($_SESSION['error'])) {
 		echo $_SESSION['error'];
+	}
 	?>
 </form>
