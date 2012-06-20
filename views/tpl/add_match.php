@@ -1,20 +1,20 @@
-<head>
-    <script type="text/javascript" src="/sport_bet/inc/calendar.js"></script>
-    <script type="text/javascript" src="/sport_bet/inc/calendar-setup.js"></script>
-    <script type="text/javascript" src="/sport_bet/inc/calendar-en.js"></script>
-    <link rel="stylesheet" href="/sport_bet/css/288433.css" />
-    <link rel="stylesheet" href="/sport_bet/css/calendar-win2k-2.css" />
+	<script type="text/javascript" src="/sport_bet/javascript/jquery.js"></script>
+	<script type="text/javascript" src="/sport_bet/javascript/jquery-calendar.js"></script>
+	<link rel="stylesheet" type="text/css" href="/sport_bet/css/jquery-calendar.css" />
+	<link rel="stylesheet" type="text/css" href="/sport_bet/css/styles.css" />
+	<script type="text/javascript">
+	$(document).ready(function () {
+		$("#calendar1, #calendar2").calendar();
+		$("#calendar1_alert").click(function(){alert(popUpCal.parseDate($('#calendar1').val()))});
+	});
+	</script>
 </head>
 <body>
-	<input name="fromdate" type="text" class="text_box" id="fromdate" value="<?php echo date('Y-m-d');?>" size="18" readonly="readonly" />
-	<img src="images/calendar.png" border="0"  id="date_picker_from" title="Date selector" style="cursor:pointer;" >
-                                        <script type="text/javascript">
-                                            Calendar.setup({
-                                                inputField     :    "fromdate",     // id of the input field
-                                                ifFormat       :    "%Y-%m-%d",      // format of the input field
-                                                button         :    "date_picker_from",  // trigger for the calendar (button ID)
-                                                align          :    "Tl",           // alignment (defaults to "Bl")
-                                                singleClick    :    true
-                                            });
-                                        </script> 
+	<div>
+		<fieldset>
+			<legend>Pick date</legend>
+			<input type="text" id="calendar1" class="calendarFocus"/>
+		</fieldset>
+	</div>
 </body>
+</html>
