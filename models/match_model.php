@@ -11,7 +11,7 @@ class match {
 	public function getAllMatches() {
 
 		// Load all matches
-		$sql = "SELECT team1, team2, score_team1, score_team2 FROM matches ORDER BY match_day DESC";
+		$sql = "SELECT team1, team2, score_team1, score_team2, match_day, result FROM matches ORDER BY match_day DESC";
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute(array('blog'));
 
@@ -22,6 +22,15 @@ class match {
 		}
 
 		return $e;
+	}
+
+	public function saveMatch() {
+
+		//
+		$sql = "INSERT INTO matches (team1, team2, match_day) VALUES (?, ?, ?, ?)";
+		if ($stmt = $this->db->prepare($sql)) {
+			$stmt->execute($array());
+		}
 	}
 
 }

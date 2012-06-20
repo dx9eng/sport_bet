@@ -1,6 +1,7 @@
 <form method="post" action="/sport_bet/home/login" enctype="multipart/form-data">
 	<fieldset>
-		<legend>Please Log In To Continue</legend>
+		<label>Please Log In To Continue</label>
+			</br>
 		<label>Email
 			<input type="text" name="useremail" maxlength="75" />
 		</label>

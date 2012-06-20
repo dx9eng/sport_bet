@@ -4,8 +4,14 @@ class user {
 
 	public function index($params) {
 
+		// Instantiate match model
+		include_once 'models/match_model.php'; 
+		$match_model = new match;
 		
-
+		// Retrieve list of entries
+		$matches = $match_model->getAllMatches();
+		
+		// Include view
 		include 'views/user_login_view.php';
 	}
 

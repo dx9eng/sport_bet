@@ -4,8 +4,15 @@
 <title>Sport bettings - admin</title>
 <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 <link rel="stylesheet" type="text/css" href="/sport_bet/css/288433.css" />
+<script type="text/javascript" src="/sport_bet/inc/jquery.js"></script>
 </head>
 <body>
+  <script language="javascript">
+  $(document).ready(function() {
+    $("tr:even").addClass("even");
+  });
+  $("tr:odd").addClass("odd");
+  </script>
   <div id="wrapper">
     <!-- Header file -->
     <div id="headerwrap">
@@ -24,19 +31,25 @@
     <!-- Content -->
     <div id="contentwrap">
       <div id="content">
-        <?php if (isset($_SESSION['admin'])) {
-          ?>
-          <p>
-            <h1>Admin</h1>
-            Admin test sample.
-          </p>
-          <?php }
-          elseif (isset($_SESSION['user'])) {
-            header('Location: /sport_bet/user/');
+        <?php
+        if (isset($_GET['page']) == 'admin' ) {
+          if (isset($_SESSION['admin'])) {
+            ?>
+            <!-- Home content-->
+            <?php include 'tpl/results.php'; ?>
+            <!-- Home content end-->
+            <?php }
+            elseif (isset($_SESSION['user'])) {
+              header('Location: /sport_bet/user/');
+            }
+            else {
+              header('Location: /sport_bet/home/');
+            }
           }
-          else {
-            header('Location: /sport_bet/home/');
-          } ?>
+          elseif (isset($_GET['page']) == 'admin' ) {
+
+          }
+          ?>
       </div>
     </div>
     <!-- Content end -->
