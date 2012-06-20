@@ -12,7 +12,15 @@ class admin {
 		$matches = $match_model->getAllMatches();
 		
 		// Include view
-		include 'views/admin_login_view.php';
+		if (isset($_SESSION['admin'])) {
+			include 'views/admin_login_view.php';
+		}
+		elseif (isset($_SESSION['user'])) {
+			header('Location: /sport_bet/user/');
+		}
+		else {
+			header('Location: /sport_bet/home/');
+		}
 	}
 
 	public function addMatch($params) {
@@ -24,5 +32,3 @@ class admin {
 	}
 
 }
-
-?>

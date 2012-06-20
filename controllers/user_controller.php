@@ -12,7 +12,15 @@ class user {
 		$matches = $match_model->getAllMatches();
 		
 		// Include view
-		include 'views/user_login_view.php';
+    if (isset($_SESSION['user'])) {
+      include 'views/index_login_view.php';
+    }
+    elseif (isset($_SESSION['admin'])) {
+      header('Location: /sport_bet/admin/');
+    }
+    else {
+      header('Location: /sport_bet/home/');
+    }
 	}
 
    public function makeBet() {
