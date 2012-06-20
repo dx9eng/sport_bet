@@ -15,6 +15,14 @@ class user {
 		include 'views/user_login_view.php';
 	}
 
+   public function makeBet() {
+
+   }
+
+   public function betHistory() {
+   	
+   }
+
     public function personalProfile() {
     	
     	  include_once 'models/user_model.php';

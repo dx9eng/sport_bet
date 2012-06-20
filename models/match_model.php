@@ -33,6 +33,10 @@ class match {
 		}
 	}
 
+	public function editMatchResult() {
+		
+	}
+
 }
 
 ?>

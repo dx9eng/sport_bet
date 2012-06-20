@@ -48,6 +48,7 @@ class UserModel {
 		}
 		else if($response['num_users'] > 0 && $response['account_type']==1){
 			$_SESSION['user'] = $_POSTs['useremail'];
+			$_SESSION['password'] = $_POSTs['password'];
 			//die($_SESSION['user']);
 			header('Location: /sport_bet/user/');
 		   exit;

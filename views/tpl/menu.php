@@ -11,8 +11,8 @@
 		}
 		elseif (isset($_SESSION['user'])) {
 			?>
-			<li><a href='#'><span>Personal Profile</span></a></li>
-			<li><a href='#'><span>Bets</span></a></li>
+			<li><a href='/sport_bet/user/personalProfile'><span>Personal Profile</span></a></li>
+			<li><a href='/sport_bet/user/makeBet'><span>Bets</span></a></li>
 			<?php
 		} ?>
 	</ul>
