@@ -11,4 +11,7 @@
 		<input type="hidden" name="action" value="login" />
 		<input type="submit" name="submit" value="Log In" />
 	</fieldset>
+	<?php
+		echo $_SESSION['error'];
+	?>
 </form>

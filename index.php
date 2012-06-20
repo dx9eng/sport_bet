@@ -1,5 +1,13 @@
 <?php
+
 session_start();
+
+$errors = array(
+	1 => '<p class = "error">Please fill the boxes.</p>',
+	2 => '<p class = "error">Login failed! Invalid email.</p>',
+	3 => '<p class = "error">Login failed! Incorect email or password.</p>',
+	4 => '<p class = "error">Login failed! Unknown cause.</p>',
+	);
 
 // Split request
 $controller = isset($_GET['page']) ? $_GET['page'] : 'home';

@@ -25,28 +25,49 @@ class home {
 
 	public function login() {
 		
-		if ($_SERVER['REQUEST_METHOD'] == 'POST'
-			&& $_POST['action'] == 'login'
-			&& !empty($_POST['useremail'])
-			&& !empty($_POST['password'])) {
-			
-						//die($_SESSION);
-						include_once 'models/user_model.php';
-				$user_model = new UserModel;
-			$user = $user_model->loginUser($_POST);
-		}	
-		 else {
-			header('Location: /sport_bet/index_login_view');
-		 }	
+		global $errors;
+		$_SESSION['error'] = NULL;
+		//$error = $errors[$_SESSION['error']];
+		$error = NULL;
+
+		$p = '/^[\w-]+(\.[\w-]+)*@[a-z0-9-]+'.'(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/i';
+
+		if ($_SESSION['error'] == NULL && ((empty($_POST['useremail'])) || (empty($_POST['password'])))) {
+			// $_SESSION['error'] = '1';
+			$_SESSION['error'] = 'Please fill the boxes.';
+			//print_r($_SESSION['error']); die;
+			header('Location: /sport_bet/home/');
+			return;
+		}
+		elseif ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'login' && !empty($_POST['useremail']) && !empty($_POST['password'])) {
+
+			include_once 'models/user_model.php';
+			$user_model = new UserModel;
+
+			if (((preg_match($p, $_POST['useremail'])) ? TRUE : FALSE) == FALSE) {
+				// $_SESSION['error'] = '2';
+				$_SESSION['error'] = 'Login failed! Invalid email.';
+				//print_r($_SESSION['error']); die;
+				header('Location: /sport_bet/home/');
+				return;
+			}
+			elseif ($_SESSION['error'] == NULL) {
+				$user = $user_model->loginUser($_POST);
+			}
+		}
+		else {
+			$_SESSION['error'] = '4';
+			//print_r($_SESSION['error']); die;
+			header('Location: /sport_bet/home/');
+			return;
+		}
 	}
+
 
 	public function logout() {
-			 unset($_SESSION);
-			 session_destroy();
-			 header('Location: /sport_bet/home/');
+		unset($_SESSION);
+		session_destroy();
+		header('Location: /sport_bet/home/');
 	}
-
-
 }
-
 ?>
