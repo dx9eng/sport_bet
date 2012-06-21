@@ -24,11 +24,38 @@ class admin {
 	}
 
 	public function addMatch($params) {
+		global $errors;
+		$_SESSION['error'] = NULL;
+		// Instantiate model
+		include_once 'models/match_model.php';
+		// print_r($params); die;
+		// Retrieve
+		if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['submit'] == 'Add Match') {
+					
+					$match_model = new match;
+					if ($_SESSION['error'] == NULL) {
+						print_r($match_model); die;
+						$matches = $match_model->saveMatch($_POST);
+					}
+				}
+
+		// header('Location: /sport_bet/admin/add_match.php');
+		include 'views/admin_add_match.php';
+
+	}
+
+	public function editResult() {
 
 		// Instantiate match model
-		include_once 'models/match_model.php';
-		$match_model = new match;
+		// Retrieve the match
+		include 'views/admin_edit_match.php';
+	}
 
+	public function addUser() {
+		
+		// Instantiate user model
+		// Retrieve the user
+		include 'views/admin_add_user.php';
 	}
 
 }

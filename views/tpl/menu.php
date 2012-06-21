@@ -4,9 +4,9 @@
 		<?php
 		if (isset($_SESSION['admin'])) {
 			?>
-			<li><a href='/sport_bet/views/tpl/add_match.php'><span>Add Matches</span></a></li>
-			<li><a href='#'><span>Edit Results</span></a></li>
-			<li><a href='#'><span>Add Users</span></a></li>
+			<li><a href='/sport_bet/admin/addMatch/'><span>Add Matches</span></a></li>
+			<li><a href='/sport_bet/admin/editResult/'><span>Edit Results</span></a></li>
+			<li><a href='/sport_bet/admin/addUser/'><span>Add Users</span></a></li>
 			<?php
 		}
 		elseif (isset($_SESSION['user'])) {
