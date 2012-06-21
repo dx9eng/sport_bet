@@ -43,8 +43,15 @@ class admin {
 					}
 				}
 
-		// header('Location: /sport_bet/admin/add_match.php');
-		include 'views/admin_add_match.php';
+		if (isset($_SESSION['admin'])) {
+			include 'views/admin_add_match.php';
+		}
+		elseif (isset($_SESSION['user'])) {
+			header('Location: /sport_bet/user/');
+		}
+		else {
+			header('Location: /sport_bet/home/');
+		}
 
 	}
 
@@ -52,14 +59,30 @@ class admin {
 
 		// Instantiate match model
 		// Retrieve the match
-		include 'views/admin_edit_match.php';
+		if (isset($_SESSION['admin'])) {
+			include 'views/admin_edit_result.php';
+		}
+		elseif (isset($_SESSION['user'])) {
+			header('Location: /sport_bet/user/');
+		}
+		else {
+			header('Location: /sport_bet/home/');
+		}
 	}
 
 	public function addUser() {
 		
 		// Instantiate user model
 		// Retrieve the user
-		include 'views/admin_add_user.php';
+		if (isset($_SESSION['admin'])) {
+			include 'views/admin_add_user.php';
+		}
+		elseif (isset($_SESSION['user'])) {
+			header('Location: /sport_bet/user/');
+		}
+		else {
+			header('Location: /sport_bet/home/');
+		}
 	}
 
 }
