@@ -10,14 +10,31 @@ class UserModel {
 	}
 
 	public function getUserData() {
-		$sql = "SELECT id_user,name,address,password FROM user WHERE email=?";
+		$sql = "SELECT id_user,name,address,email,password FROM user WHERE email=?";
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute(array($_SESSION['user']));
 		$response = $stmt->fetch();
 		return $response;
 		
 	}
+	public function takeAvailableBets() {
+		$sql = "SELECT id_match,team1,team2,match_day FROM matches WHERE result is NULL";
+		$stmt = $this->db->prepare($sql);
+		$stmt->execute();
+		$response = $stmt->fetch();
+		return $response;
+	}
 
+    public function mailExists($m) {
+    	//die($m);
+			$sql = "SELECT COUNT(*) AS num_user FROM user WHERE email='$m'";
+			$stmt = $this->db->prepare($sql);
+			$stmt->execute();
+			$response = $stmt->fetch();
+      //die($response['num_user']);
+			if($response['num_user']>0) return true;
+			  return false;	
+	} 
 
 	public function updateData($p) {
 		if($p['email'] != $_SESSION['user']) {
@@ -31,6 +48,15 @@ class UserModel {
 		$response = $stmt->fetch();  
 
 	}
+
+    public function setPassword($id_user,$pass) {
+    	$sql = "UPDATE user
+               SET   password=?
+              WHERE id_user=?";
+      	$stmt = $this->db->prepare($sql);
+		$stmt->execute(array($p['email'],$id_user));
+		$response = $stmt->fetch();  
+    }
 
 	public function loginUser($_POSTs) {
 
