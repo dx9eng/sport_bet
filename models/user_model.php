@@ -17,24 +17,32 @@ class UserModel {
 		return $response;
 		
 	}
-	public function takeAvailableBets() {
-		$sql = "SELECT id_match,team1,team2,match_day FROM matches WHERE result is NULL";
-		$stmt = $this->db->prepare($sql);
-		$stmt->execute();
-		$response = $stmt->fetch();
-		return $response;
-	}
+	
 
     public function mailExists($m) {
-    	//die($m);
+    	//$m1=$this->sanitizeData($m);
+    	die(print_r($m));
 			$sql = "SELECT COUNT(*) AS num_user FROM user WHERE email='$m'";
 			$stmt = $this->db->prepare($sql);
 			$stmt->execute();
 			$response = $stmt->fetch();
       //die($response['num_user']);
 			if($response['num_user']>0) return true;
-			  return false;	
+			else  return false;	
 	} 
+
+	function sanitizeData($data) {
+   // If $data is not an array, run strip_tags()
+   if(!is_array($data)) {
+			// Remove all tags except <a> tags
+  		return strip_tags($data, "<a>");
+	}
+	// If $data is an array, process each element
+  else {
+		// Call sanitizeData recursively for each array element
+  	return array_map('sanitizeData', $data);
+	}
+}
 
 	public function updateData($p) {
 		if($p['email'] != $_SESSION['user']) {

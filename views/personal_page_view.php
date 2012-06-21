@@ -23,7 +23,7 @@ $(document).ready(function() {
 			$.ajax({
 				type: "POST",
 				url: "/sport_bet/user/mailExists",
-				data: $new_email,
+				data: $new_email,                    //data nu se trimite bine
 				dataType: 'text',
 				success: function(data) {
 					 alert(data);

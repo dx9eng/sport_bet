@@ -12,7 +12,7 @@
 		elseif (isset($_SESSION['user'])) {
 			?>
 			<li><a href='/sport_bet/user/personalProfile'><span>Personal Profile</span></a></li>
-			<li><a href='/sport_bet/user/takeAvailableBets'><span>Bets</span></a></li>
+			<li><a href='/sport_bet/bet/takeAvailableBets'><span>Bets</span></a></li>
 			<?php
 		} ?>
 	</ul>
