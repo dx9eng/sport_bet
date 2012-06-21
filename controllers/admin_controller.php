@@ -28,11 +28,15 @@ class admin {
 		$_SESSION['error'] = NULL;
 		// Instantiate model
 		include_once 'models/match_model.php';
+		$match_model = new match;
 		// print_r($params); die;
 		// Retrieve
+		$last = $match_model->getUnfinished();
+		//print_r($match_model->getUnfinished()); die;
+		
 		if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['submit'] == 'Add Match') {
 					
-					$match_model = new match;
+					
 					if ($_SESSION['error'] == NULL) {
 						print_r($match_model); die;
 						$matches = $match_model->saveMatch($_POST);

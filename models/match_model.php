@@ -11,9 +11,9 @@ class match {
 	public function getAllMatches() {
 
 		// Load all matches
-		$sql = "SELECT team1, team2, score_team1, score_team2, match_day, result FROM matches WHERE (score_team1 is not NULL) OR (score_team2 is not NULL) ORDER BY match_day DESC";
+		$sql = "SELECT team1, team2, score_team1, score_team2, match_day, result FROM matches WHERE (score_team1 is not NULL) AND (score_team2 is not NULL) ORDER BY match_day DESC";
 		$stmt = $this->db->prepare($sql);
-		$stmt->execute(array('blog'));
+		$stmt->execute(array('match'));
 
 		$e = NULL;
 
@@ -21,6 +21,22 @@ class match {
 			$e[] = $row;
 		}
 
+		return $e;
+	}
+
+	public function getUnfinished() {
+
+		// Load all matches
+		$sql = "SELECT team1, team2, match_day FROM matches WHERE (score_team1 is NULL) AND (score_team2 is NULL) ORDER BY match_day DESC";
+		$stmt = $this->db->prepare($sql);
+		$stmt->execute(array('last'));
+
+		$e = NULL;
+
+		while ($row = $stmt->fetch()) {
+			$e[] = $row;
+		}
+		// print_r($row); die;
 		return $e;
 	}
 

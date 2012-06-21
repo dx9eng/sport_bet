@@ -2,7 +2,7 @@
 <?php include 'tpl/top.php'; ?>
 
 <!-- content -->
-	<script type="text/javascript" src="/sport_bet/javascript/jquery.js"></script>
+
 	<script type="text/javascript" src="/sport_bet/javascript/jquery-calendar.js"></script>
 	<link rel="stylesheet" type="text/css" href="/sport_bet/css/jquery-calendar.css" />
 	<script type="text/javascript">
@@ -12,7 +12,8 @@
 	});
 	</script>
 </head>
-<body>
+	<!-- -->
+	<!-- Add match form -->
 	<div>
 		<form >
 			<fieldset id="match">
@@ -23,14 +24,36 @@
 				<input type="text" id="team2" class=""/>
 				<legend>Pick date</legend>
 				<input type="text" id="calendar1" class="calendarFocus"/>
-				
 				<input type="submit" name="submit" value="Add Match">
 				<input type="submit" name="submit" value="Cancel" />
 			</fieldset>
 		</form>
 	</div>
-</body>
-</html>
+	<!-- End Add match form-->
+	<!-- Display last matches added -->
+	<p>
+		<h1>Last matches added</h1>
+	</p>
+	<div id="match-result">
+		<?php
+			$i = 0;
+			foreach ($last as $l) :
+				if ($i == 5) {
+					break;
+				}
+			?>
+		<table cellpadding="0" cellspacing="0">
+			<tr>
+				<td id="td-d"><?php echo $l['match_day']; ?></td>
+				<th id="td-m"><?php echo $l['team1'] . " vs. " . $l['team2']; ?></th>
+			</tr>
+		</table>
+		<?php
+			$i++;
+			endforeach;
+		?>
+	</div>
+<!-- End Display last matches added -->
 
 <!-- bottom -->
 <?php include 'tpl/bottom.php'; ?>
