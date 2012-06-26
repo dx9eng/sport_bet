@@ -44,7 +44,7 @@
 			?>
 		<table cellpadding="0" cellspacing="0">
 			<tr>
-				<td id="td-d"><?php echo $l['match_day']; ?></td>
+				<td id="td-d"><?php $format = "d-m-Y H:i"; echo $t = date($format, strtotime($l['match_day'])); ?></td>
 				<th id="td-m"><?php echo $l['team1'] . " vs. " . $l['team2']; ?></th>
 			</tr>
 		</table>

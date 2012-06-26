@@ -36,7 +36,7 @@ var popUpCal = {
 	customDate: null, // Function that takes a date and returns an array with [0] = true if selectable, false if not,
 		// [1] = custom CSS class name(s) or '', e.g. popUpCal.noWeekends
 	fieldSettings: null, // Function that takes an input field and returns a set of custom settings for the calendar
-	timeSeparators:[' ',':','AM','PM'],	//An array of time separators: the first and second strings are obligatory, while the second and third strings specify
+	timeSeparators:[' ',':'],	//An array of time separators: the first and second strings are obligatory, while the second and third strings specify
 		//the AM and PM strings if they are needed; the first parameter separates the date and time fields.
 	//timeSeparators:[' ',':'], 	//Enable the time selector without AM/PM
 		
@@ -155,12 +155,7 @@ var popUpCal = {
 	
 	/*Translates this hour into the AM/PM number if neccessary*/
 	hourString: function(Hour) {
-		if (this.timeSeparators.length == 4) {
-			if (Hour == 0) return '' + 12;
-			else if (Hour > 12) return '' + (Hour - 12);
-			else return '' + Hour;
-		} 
-		else return '' + Hour;
+		return '' + Hour;
 	},
 	
 	/* Update the input field with the selected date. */
@@ -202,9 +197,7 @@ var popUpCal = {
 			timeSelect +='</select>';
 			
 			if (this.timeSeparators.length == 4) {
-				timeSelect += ' <select id="calendar_ampm">';
-				timeSelect += '<option value="AM"' + ((this.selectedHour < 12) ? ' selected="selected"' : '') + '>' + this.timeSeparators[2] + '</option>';
-				timeSelect += '<option value="PM"' + ((this.selectedHour >= 12) ? ' selected="selected"' : '') + '>' + this.timeSeparators[3] + '</option>';
+				timeSelect += ' <select id="calendar_24h">';
 				timeSelect += '</select>';
 			}
 			
@@ -431,9 +424,7 @@ var popUpCal = {
 				popUpCal.selecting = false;
 				popUpCal.selectedHour = this.options[this.selectedIndex].value - 0;
 				if (popUpCal.timeSeparators.length == 4) {
-					var ampm = $('#calendar_ampm').val();
-					if (ampm == 'AM' && popUpCal.selectedHour == 12) popUpCal.selectedHour = 0;
-					else if (ampm == 'PM' && popUpCal.selectedHour != 12) popUpCal.selectedHour += 12;
+					var ampm = $('#calendar_24h').val();
 				}
 				popUpCal.adjustDate(); 
 				popUpCal.input.val(popUpCal.formatDate(popUpCal.selectedDay, popUpCal.selectedMonth, popUpCal.selectedYear, popUpCal.selectedHour, popUpCal.selectedMinute));
@@ -444,10 +435,10 @@ var popUpCal = {
 				popUpCal.adjustDate(); 
 				popUpCal.input.val(popUpCal.formatDate(popUpCal.selectedDay, popUpCal.selectedMonth, popUpCal.selectedYear, popUpCal.selectedHour, popUpCal.selectedMinute));
 			}).click(this.selectMonthYear);;
-			$("#calendar_ampm").change(function() {		//change am/pm
+			$("#calendar_24h").change(function() {		//change am/pm
 				popUpCal.selecting = false;
 				if (popUpCal.timeSeparators.length == 4) {
-					var ampm = $('#calendar_ampm').val();
+					var ampm = $('#calendar_24h').val();
 					if (ampm == 'AM' && popUpCal.selectedHour > 12) popUpCal.selectedHour -= 12;
 					else if (ampm == 'PM' && popUpCal.selectedHour < 12) popUpCal.selectedHour += 12;
 					else if (ampm == 'PM'  && popUpCal.selectedHour == 12) popUpCal.selectedHour = 12;
