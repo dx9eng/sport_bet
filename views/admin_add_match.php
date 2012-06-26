@@ -2,7 +2,7 @@
 <?php include 'tpl/top.php'; ?>
 
 <!-- content -->
-
+	<link rel="stylesheet" type="text/css" href="/sport_bet/css/table.css" />
 	<script type="text/javascript" src="/sport_bet/javascript/jquery-calendar.js"></script>
 	<link rel="stylesheet" type="text/css" href="/sport_bet/css/jquery-calendar.css" />
 	<script type="text/javascript">

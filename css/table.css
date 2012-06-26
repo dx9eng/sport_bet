@@ -1,0 +1,24 @@
+table {
+    width: 550px;
+    border: 0px;
+    text-align: center;
+    table-layout: fixed;
+    margin: 0px 0px 0px 0px;
+}
+#td-d {
+    width: 150px;
+    padding: 1px 1px;
+}
+#td-m {
+    width: 300px;
+    padding: 1px 1px;
+}
+#td-r {
+    width: 50px;
+    padding: 1px 1px;
+}
+table tr:hover {
+background-color: #c00;
+color: #fff;
+cursor:url("/sport_bet/inc/spo61.cur"), pointer;
+}

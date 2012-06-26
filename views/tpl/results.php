@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="/sport_bet/css/table.css" />
 <p>
   <h1>Last results</h1>
 </p>
