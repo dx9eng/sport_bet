@@ -100,12 +100,15 @@ class UserModel {
 		
 	}
 
-	public function checkforemail($p) {
-		$email = htmlentities(strip_tags($p['email']),ENT_QUOTES);
-		
+	public function checkforemail($email) {
 		$sql = "SELECT email FROM user WHERE email = '$email'";
-		$result = mysql_query($sql);
-		$row = mysql_fetch_row($result);
+		if ($stmt = $this->db->prepare($sql)) {
+			$stmt->execute(array($email));
+			$stmt->closeCursor();
+			//$result = mysql_query($stmt);
+			//$row = mysql_fetch_row($result);
+			//print_r($stmt); die;
+		}
 	}
 
 	public function insertUser($p) {
@@ -115,7 +118,7 @@ class UserModel {
 		$password = htmlentities(strip_tags($p['password']),ENT_QUOTES);
 		
 		$sql = "INSERT INTO user (name, email, password, account_type) VALUES (?, ?, ?, 1)";
-		if($stmt = $this->db->prepare($sql)) {
+		if ($stmt = $this->db->prepare($sql)) {
 			$stmt->execute(array($name, $email, $password));
 			//print_r($stmt); die;
 			$stmt->closeCursor();

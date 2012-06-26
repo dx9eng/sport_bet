@@ -127,15 +127,18 @@ class admin {
 				$email = preg_replace( '((?:\n|\r|\t|%0A|%0D|%08|%09)+)i' , '', $_POST['email'] );
 				$email = mysql_real_escape_string($email);
 
-				// $user = $user_model->checkforemail();
-				// print_r($user); die;
-				// if ($user[0] == $email) {
-				//	$_SESSION['error'] = 'Email is already in use';
-				// }
+				$user = $user_model->checkforemail($email);
+				print_r($user); die;
+				if ($user[0] == $email) {
+					$_SESSION['error'] = 'Email is already in use';
+				}
 				// else {
 					// create a verification code
 				 	// $verification_code = uniqid();
 				 $user = $user_model->insertUser($_POST);
+				 $_SESSION['error'] = NULL;
+				 $_POST['name'] = $_POST['password'] = $_POST['email'] = NULL;
+				 // session_destroy();
 				// }
 			}
 			include 'views/admin_add_user.php';

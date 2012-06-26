@@ -38,7 +38,7 @@
 	if (isset($_SESSION['error'])) {
 		echo $_SESSION['error'];
 	} else {
-		echo "dasfj";
+		echo "User added";
 	}
 	?>
 </table>
