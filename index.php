@@ -12,7 +12,8 @@ $errors = array(
 // Split request
 $controller = isset($_GET['page']) ? $_GET['page'] : 'home';
 $action = isset($_GET['action']) ? $_GET['action'] : 'index';
-$params = isset($_GET['params']) ? explode('/', $_GET['params']) : "array default ";
+
+$params = isset($_GET['params']) ? explode('/', $_GET['params']) : array();
 //$_POST['email'] = "admin@yahoo.com";
 //$p = $_POST['email'];
 // Config

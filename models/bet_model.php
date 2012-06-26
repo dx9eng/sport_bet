@@ -12,7 +12,9 @@ class bet {
 		$sql = "SELECT id_match,team1,team2,match_day FROM matches WHERE result is NULL";
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute();
-		$response = $stmt->fetch();
+		$response = $stmt->fetchAll();
+		//print_r($response);
+       // die();
 		return $response;
 	}
  

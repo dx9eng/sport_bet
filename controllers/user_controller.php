@@ -32,15 +32,16 @@ class user {
    }
 
    public function takeAvailableBets() {
-        include_once 'models/user_model.php';
-		$user_model = new UserModel;
-		$matches = $user_model->takeAvailableBets();
+        include_once 'models/bet_model.php';
+		$bet_model = new bet;
+		$matches = $bet_model->takeAvailableBets();
 		include_once 'views/make_bet_view.php';
    }
 
     public function personalProfile() {
     	
-    	  include_once 'models/user_model.php';
+    	
+      include_once 'models/user_model.php';
 		  $user_model = new UserModel;
 
     	if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -58,28 +59,14 @@ class user {
     	
 		  $user_data = $user_model->getUserData();
 		  include_once 'views/personal_page_view.php';
-	  }
+	   }
     }
-
-    
-
-    public function changeEmail($email) {
-    	include_once 'models/user_model.php';
-		  $user_model = new UserModel;
-
-    	if($user_model->mailExists($email)) {
-
-    	}
-       }
-
-
-    
  
    public function mailExists($email) {
    	include_once 'models/user_model.php';
     $user_model = new UserModel;
      //die($email);
-    if($user_model->mailExists($email)==true){
+    if($user_model->mailExists($email) == true){
         echo "true";
         //die("true");
       }

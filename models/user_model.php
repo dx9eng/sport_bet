@@ -9,6 +9,7 @@ class UserModel {
 		$this->db = new PDO(DB_INFO, DB_USER, DB_PASS);
 	}
 
+
 	public function getUserData() {
 		$sql = "SELECT id_user,name,address,email,password FROM user WHERE email=?";
 		$stmt = $this->db->prepare($sql);
@@ -21,7 +22,9 @@ class UserModel {
 
     public function mailExists($m) {
     	//$m1=$this->sanitizeData($m);
-    	die(print_r($m));
+    	//$m1 = array_map('htmlentities',$m);  
+			//print_r(htmlentities());
+    	die(print_r($m)."    ");
 			$sql = "SELECT COUNT(*) AS num_user FROM user WHERE email='$m'";
 			$stmt = $this->db->prepare($sql);
 			$stmt->execute();
@@ -67,10 +70,10 @@ class UserModel {
     }
 
 	public function loginUser($_POSTs) {
-
+   
 		global $errors;
 
-		$sql = "SELECT account_type,COUNT(*) AS num_users FROM user WHERE email=? AND password=?";
+   	$sql = "SELECT account_type,COUNT(*) AS num_users FROM user WHERE email=? AND password=?";
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute(array($_POSTs['useremail'], $_POSTs['password']));
 		$response = $stmt->fetch();

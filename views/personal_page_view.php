@@ -21,10 +21,10 @@ $(document).ready(function() {
 		if($new_email != $(':hidden[name=email]').val()) {
 			confirm($new_email);
 			$.ajax({
-				type: "POST",
-				url: "/sport_bet/user/mailExists",
-				data: $new_email,                    //data nu se trimite bine
-				dataType: 'text',
+				type: "GET",
+				url: "/sport_bet/user/mailExists/" + $new_email,
+	//			data: $new_email,                    //data nu se trimite bine
+	//			dataType: 'text',
 				success: function(data) {
 					 alert(data);
 					 if(data == "false")
@@ -74,10 +74,9 @@ $(document).ready(function() {
 	
 				$.ajax({
 					type: "POST",
-					url: "/sport_bet/user/setPassword/",
-					data: {id_user:$(':hidden[name=id_user]'),pass:$acc_pass},
-				
-					success: function(data) {
+					url: "/sport_bet/user/setPassword/"+ $(':hidden[name=id_user]')+"/"+$acc_pass,
+				//	data: {id_user:,pass:$acc_pass},
+			   	success: function(data) {
 						confirm("data="+data);
 					},
 					error: function() { alert("error"); }

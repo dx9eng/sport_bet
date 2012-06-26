@@ -4,7 +4,7 @@ define('DB_USER', 'root');
 define('DB_PASS', '');
 
 
-define('BASE_PATH',realpath('.'). DIRECTORY_SEPARATOR);
-define('BASE_URL', dirname($_SERVER["SCRIPT_NAME"]). "/");
+//define('BASE_PATH',realpath('.'). DIRECTORY_SEPARATOR);
+//define('BASE_URL', dirname($_SERVER["SCRIPT_NAME"]). "/");
 
 ?>
