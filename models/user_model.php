@@ -102,13 +102,27 @@ class UserModel {
 
 	public function checkforemail($email) {
 		$sql = "SELECT email FROM user WHERE email = '$email'";
-		if ($stmt = $this->db->prepare($sql)) {
-			$stmt->execute(array($email));
-			$stmt->closeCursor();
-			//$result = mysql_query($stmt);
-			//$row = mysql_fetch_row($result);
-			//print_r($stmt); die;
+		$stmt = $this->db->prepare($sql);
+		$stmt->execute(array($email));
+		//print_r($stmt); die;
+		$response = $stmt->fetch();
+		//print_r($response); die;
+		return $response;
+	}
+	public function getAllMatches() {
+
+		// Load all matches
+		$sql = "SELECT team1, team2, score_team1, score_team2, match_day, result FROM matches WHERE (score_team1 is not NULL) AND (score_team2 is not NULL) ORDER BY match_day DESC";
+		$stmt = $this->db->prepare($sql);
+		$stmt->execute(array('match'));
+
+		$e = NULL;
+
+		while ($row = $stmt->fetch()) {
+			$e[] = $row;
 		}
+
+		return $e;
 	}
 
 	public function insertUser($p) {

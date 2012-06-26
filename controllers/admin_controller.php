@@ -128,18 +128,19 @@ class admin {
 				$email = mysql_real_escape_string($email);
 
 				$user = $user_model->checkforemail($email);
-				print_r($user); die;
-				if ($user[0] == $email) {
+				// print_r($user); die;
+				if ($user == $email) {
+					header('Location: /sport_bet/admin/addUser/');
 					$_SESSION['error'] = 'Email is already in use';
 				}
-				// else {
+				elseif ($user != $email) {
 					// create a verification code
 				 	// $verification_code = uniqid();
 				 $user = $user_model->insertUser($_POST);
 				 $_SESSION['error'] = NULL;
 				 $_POST['name'] = $_POST['password'] = $_POST['email'] = NULL;
 				 // session_destroy();
-				// }
+				}
 			}
 			include 'views/admin_add_user.php';
 		}
