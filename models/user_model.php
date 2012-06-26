@@ -85,32 +85,26 @@ class UserModel {
 		elseif ($response['num_users'] > 0 && $response['account_type']==1){
 			$_SESSION['user'] = $_POSTs['useremail'];
 			$_SESSION['password'] = $_POSTs['password'];
-			//die($_SESSION['user']);
 			header('Location: /sport_bet/user/');
 		  exit;
 		}
 		else {
-			// die($_SESSION);
-			// $_SESSION['error'] = '3';
 			$_SESSION['error'] = 'Login failed! Incorect email or password.';
 		  echo "<p>Please try again!</p>";
 		  header('Location: /sport_bet/home/');
 		  exit;	
 		}
-		
 	}
 
 	public function checkforemail($email) {
 		$sql = "SELECT email FROM user WHERE email = '$email'";
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute(array($email));
-		//print_r($stmt); die;
 		$response = $stmt->fetch();
-		//print_r($response); die;
 		return $response;
 	}
-	public function getAllMatches() {
 
+	public function getAllMatches() {
 		// Load all matches
 		$sql = "SELECT team1, team2, score_team1, score_team2, match_day, result FROM matches WHERE (score_team1 is not NULL) AND (score_team2 is not NULL) ORDER BY match_day DESC";
 		$stmt = $this->db->prepare($sql);
@@ -130,14 +124,11 @@ class UserModel {
 		$name = htmlentities(strip_tags($p['name']),ENT_QUOTES);
 		$email = htmlentities(strip_tags($p['email']),ENT_QUOTES);
 		$password = htmlentities(strip_tags($p['password']),ENT_QUOTES);
-		
+
 		$sql = "INSERT INTO user (name, email, password, account_type) VALUES (?, ?, ?, 1)";
 		if ($stmt = $this->db->prepare($sql)) {
 			$stmt->execute(array($name, $email, $password));
-			//print_r($stmt); die;
 			$stmt->closeCursor();
-
-			unset($_SESSION['c_name'], $_SESSION['c_email'], $_SESSION['c_password'], $_SESSION['error']);
 			return;
 		}
 		else {

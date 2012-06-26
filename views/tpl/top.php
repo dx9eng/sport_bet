@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Sport bettings - home</title>
+<title>Sport bettings</title>
 <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 <link rel="stylesheet" type="text/css" href="/sport_bet/css/style.css" />
 <script type="text/javascript" src="/sport_bet/javascript/jquery.js"></script>

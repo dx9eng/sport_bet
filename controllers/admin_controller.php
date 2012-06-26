@@ -37,8 +37,6 @@ class admin {
 		//print_r($match_model->getUnfinished()); die;
 		
 		if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['submit'] == 'Add Match') {
-					
-					
 					if ($_SESSION['error'] == NULL) {
 						print_r($match_model); die;
 						$matches = $match_model->saveMatch($_POST);
@@ -82,26 +80,28 @@ class admin {
 		$user_model = new UserModel;
 
 		if (isset($_SESSION['admin'])) {
-			// print_r($_POST); die;
 			// check all fields have been posted
 			if (!isset($_POST['name'], $_POST['email'], $_POST['password'])) {
 				$_SESSION['error'] = 'All fields must be completed';
 			}
 			// check the length of the user name
-			elseif (strlen($_POST['name']) < 2 || strlen($_POST['name']) > 45) {
+			elseif (strlen($_POST['name']) < 3 || strlen($_POST['name']) > 45) {
 				$_SESSION['error'] = 'Invalid Name';
 			}
 			// check the length of the password
-			elseif (strlen($_POST['password']) < 6 || strlen($_POST['password']) > 45) {
+			elseif (strlen($_POST['password']) < 4 || strlen($_POST['password']) > 45) {
 				$_SESSION['error'] = 'Invalid Password';
 			}
 			// check the length of the users email
-			elseif (strlen($_POST['email']) < 6 || strlen($_POST['email']) > 45) {
-				$_SESSION['error'] = 'Invalid Email';
+			elseif (strlen($_POST['email']) < 6) {
+				$_SESSION['error'] = 'Too short email';
+			}
+			elseif (strlen($_POST['email']) > 45) {
+				$_SESSION['error'] = 'Too long email';
 			}
 			// check for email valid email address
 			elseif (!preg_match("/^\S+@[\w\d.-]{2,}\.[\w]{2,6}$/iU", $_POST['email'])) {
-				$_SESSION['error'] = 'Email Invalid';
+				$_SESSION['error'] = 'Invalid Email';
 			}
 			else {
 				// escape all
@@ -114,14 +114,10 @@ class admin {
 				$email = mysql_real_escape_string($email);
 
 				$user_email = $user_model->checkforemail($email);
-				print_r($user_email); die;
-				if ($user_email == $email) {
-					header('Location: /sport_bet/admin/addUser/');
+				if ($user_email[0] == $email) {
 					$_SESSION['error'] = 'Email is already in use';
 				}
-				elseif ($user_email != $email) {
-					// create a verification code
-				 	// $verification_code = uniqid();
+				elseif ($user_email[0] != $email) {
 				 $user = $user_model->insertUser($_POST);
 				 $_SESSION['error'] = NULL;
 				 $_POST['name'] = $_POST['password'] = $_POST['email'] = NULL;

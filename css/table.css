@@ -1,10 +1,20 @@
-table {
+#match-result {
     width: 550px;
-    border: 0px;
-    text-align: center;
-    table-layout: fixed;
-    margin: 0px 0px 0px 0px;
+    margin: 5px 0px 20px 100px;
 }
+.even {
+background-color: #DDDDDD;
+}
+.even #td-r {
+border-bottom: 3px solid #DDDDAA;
+}
+.even #td-m {
+border-bottom: 3px solid #DDDDAA;
+}
+.even #td-d {
+border-bottom: 3px solid #DDDDAA;
+}
+
 #td-d {
     width: 150px;
     padding: 1px 1px;
