@@ -47,7 +47,7 @@ class user {
            include_once 'views/personal_page_view.php';
 		}
 		 elseif($_SERVER['REQUEST_METHOD']=='POST' && $_POST['submit']=='Cancel') {
-         header('Location: /mvc/admin/');
+         header('Location: /sport_bet/user/');
          exit;
         }
         else {

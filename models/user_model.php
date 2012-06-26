@@ -63,6 +63,34 @@ class UserModel {
 		
 	}
 
+	public function checkforemail($p) {
+		$email = htmlentities(strip_tags($p['email']),ENT_QUOTES);
+		
+		$sql = "SELECT email FROM user WHERE email = '$email'";
+		$result = mysql_query($sql);
+		$row = mysql_fetch_row($result);
+	}
+
+	public function insertUser($p) {
+
+		$name = htmlentities(strip_tags($p['name']),ENT_QUOTES);
+		$email = htmlentities(strip_tags($p['email']),ENT_QUOTES);
+		$password = htmlentities(strip_tags($p['password']),ENT_QUOTES);
+		
+		$sql = "INSERT INTO user (name, email, password, account_type) VALUES (?, ?, ?, 1)";
+		if($stmt = $this->db->prepare($sql)) {
+			$stmt->execute(array($name, $email, $password));
+			//print_r($stmt); die;
+			$stmt->closeCursor();
+
+			unset($_SESSION['c_name'], $_SESSION['c_email'], $_SESSION['c_password'], $_SESSION['error']);
+			return;
+		}
+		else {
+			$_SESSION['error'] = 'No data inserted';
+			return;
+		}
+	}
 }
 
 ?>

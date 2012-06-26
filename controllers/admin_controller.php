@@ -26,6 +26,8 @@ class admin {
 	public function addMatch($params) {
 		global $errors;
 		$_SESSION['error'] = NULL;
+		$error = NULL;
+		
 		// Instantiate model
 		include_once 'models/match_model.php';
 		$match_model = new match;
@@ -70,13 +72,61 @@ class admin {
 		}
 	}
 
-	public function addUser() {
+	public function addUser($params) {
 		
+		global $errors;
+		$_SESSION['error'] = NULL;
+
 		// Instantiate user model
-		// Retrieve the user
+		include_once 'models/user_model.php';
+		$user_model = new UserModel;
+
 		if (isset($_SESSION['admin'])) {
+			// print_r($_POST); die;
+			// check all fields have been posted
+			if (!isset($_POST['name'], $_POST['email'], $_POST['password'])) {
+				$_SESSION['error'] = 'All fields must be completed';
+			}
+			// check the length of the user name
+			elseif (strlen($_POST['name']) < 2 || strlen($_POST['name']) > 45) {
+				$_SESSION['error'] = 'Invalid Name';
+			}
+			// check the length of the password
+			elseif (strlen($_POST['password']) < 6 || strlen($_POST['password']) > 45) {
+				$_SESSION['error'] = 'Invalid Password';
+			}
+			// check the length of the users email
+			elseif (strlen($_POST['email']) < 6 || strlen($_POST['email']) > 45) {
+				$_SESSION['error'] = 'Invalid Email';
+			}
+			// check for email valid email address
+			elseif (!preg_match("/^\S+@[\w\d.-]{2,}\.[\w]{2,6}$/iU", $_POST['email'])) {
+				$_SESSION['error'] = 'Email Invalid';
+			}
+			else {
+				// escape all
+				$name = mysql_real_escape_string($_POST['name']);
+				// encrypt the password
+				$password = sha1($_POST['password']);
+				$password = mysql_real_escape_string($password);
+				// strip injection chars from email
+				$email = preg_replace( '((?:\n|\r|\t|%0A|%0D|%08|%09)+)i' , '', $_POST['email'] );
+				$email = mysql_real_escape_string($email);
+
+				// $user = $user_model->checkforemail();
+				// print_r($user); die;
+				// if ($user[0] == $email) {
+				//	$_SESSION['error'] = 'Email is already in use';
+				// }
+				// else {
+					// create a verification code
+				 	// $verification_code = uniqid();
+				 $user = $user_model->insertUser($_POST);
+				// }
+			}
 			include 'views/admin_add_user.php';
 		}
+
 		elseif (isset($_SESSION['user'])) {
 			header('Location: /sport_bet/user/');
 		}
@@ -84,5 +134,4 @@ class admin {
 			header('Location: /sport_bet/home/');
 		}
 	}
-
 }
