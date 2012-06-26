@@ -127,13 +127,13 @@ class admin {
 				$email = preg_replace( '((?:\n|\r|\t|%0A|%0D|%08|%09)+)i' , '', $_POST['email'] );
 				$email = mysql_real_escape_string($email);
 
-				$user = $user_model->checkforemail($email);
-				// print_r($user); die;
-				if ($user == $email) {
+				$user_email = $user_model->checkforemail($email);
+				print_r($user_email); die;
+				if ($user_email == $email) {
 					header('Location: /sport_bet/admin/addUser/');
 					$_SESSION['error'] = 'Email is already in use';
 				}
-				elseif ($user != $email) {
+				elseif ($user_email != $email) {
 					// create a verification code
 				 	// $verification_code = uniqid();
 				 $user = $user_model->insertUser($_POST);
