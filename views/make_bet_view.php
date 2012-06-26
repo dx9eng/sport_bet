@@ -12,30 +12,49 @@ $(document).ready(function() {
 		//alert($('select').val()==1);
 
     $('select').each(function() {
-   			var currentSelect = $(this);
-   				alert($(this).val()!="none");
-   // ... do your thing ;-)
-   });
-
-		/*if($(':submit[value!=none]')) {
+   		var currentSelect = $(this);
+   		alert($(this).val());
+   		//alert($(this).val()!="none");
+   		alert($(this).attr('id'));
+  		if($(this).val()!="none") {
 	  		$.ajax({
 					type: "POST",
-					url: "/sport_bet/user/makeBet/",
-					data: {id_user:$(':hidden[name=id_user]'),pass:$acc_pass},
-				
+					url: "/sport_bet/user/makeBet/"+$(this).attr('id')+"/"+$(this).val(),
 					success: function(data) {
 						confirm("data="+data);
 					},
 					error: function() { alert("error"); }
 				});
 			
-		}*///end if
+		} //end if
+
+  });
+
 		//event.preventDefault();
 	}); //end click
-});
+});//end document
 
 
 	</script>
+
+
+	<?php if(!empty($bets)) {
+		foreach ($bets as $row) :
+	?>		
+	 <table cellpadding="0" cellspacing="0">
+	    <tr>
+	      <td id="td-d"><?php echo $row['match_day']; ?></td>
+	      <th id="td-m"><?php echo $row['team1'] . " vs. " . $row['team2']."  "; ?></th>
+	      <td id="td-r"><?php echo "    ".$row['bet_option']; ?></td>
+	    </tr>
+	 </table>
+	<?php endforeach; ?>
+	
+	<?php
+	} 
+else {
+	 echo "No available bets!";
+}?>
 
 
 

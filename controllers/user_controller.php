@@ -23,8 +23,12 @@ class user {
     }
 	}
 
-   public function makeBet() {
-
+   public function makeBet($p) {
+      //print_r($p);die;
+    include_once 'models/bet_model.php';
+    $bet_model = new bet;
+    $matches = $bet_model->makeBet($p);
+    include_once 'views/make_bet_view.php';
    }
 
    public function betHistory() {
@@ -32,9 +36,10 @@ class user {
    }
 
    public function takeAvailableBets() {
-        include_once 'models/bet_model.php';
+    include_once 'models/bet_model.php';
 		$bet_model = new bet;
 		$matches = $bet_model->takeAvailableBets();
+    $bets = $bet_model->getUserBets();
 		include_once 'views/make_bet_view.php';
    }
 
@@ -58,6 +63,7 @@ class user {
         else {
     	
 		  $user_data = $user_model->getUserData();
+      //print_r($user_data);die;
 		  include_once 'views/personal_page_view.php';
 	   }
     }
@@ -75,10 +81,11 @@ class user {
      }
    }
  
-  public function setPassword($id_user,$pass){
+  public function setPassword($p){
      include_once 'models/user_model.php';
      $user_model = new UserModel;
-     $user_model->setPassword($id_user,$pass);
+     //print_r($p);die();
+     $user_model->setPassword($p[0],$p[1]);
   }
   
 }

@@ -1,6 +1,6 @@
 
 
- <?php include_once 'views/tpl/header.php'; ?> 
+ <?php// include_once 'views/tpl/header.php'; ?> 
 
 	<script type="text/javascript" src="/SportBet/javascript/jquery.js"></script>
 	<script>
@@ -13,24 +13,30 @@ $(document).ready(function() {
 	$('.error').hide();
 	$('.error_pass').hide();
 	$('.error_email').hide();
+
+	// confirm($('.error_email').is(":hidden"));
 	//alert("a");
 
 	$(':input[name=email]').focusout(function() {
 		$new_email = $(':input[name=email]').val();
 		//confirm($new_email);
 		if($new_email != $(':hidden[name=email]').val()) {
-			confirm($new_email);
+			//confirm($new_email);
 			$.ajax({
 				type: "GET",
 				url: "/sport_bet/user/mailExists/" + $new_email,
 	//			data: $new_email,                    //data nu se trimite bine
 	//			dataType: 'text',
 				success: function(data) {
-					 alert(data);
-					 if(data == "false")
+					// alert(data);
+					 if(data == "false") {
+					 	
+
              $('.error_email').hide();
-           else
+           }
+           else {
            	 $('.error_email').show();
+           	}
 				},
 				error: function(data) {
 					alert("error");
@@ -44,9 +50,27 @@ $(document).ready(function() {
 		$data = $(':input[name=new_password]').val();
 		$acc_pass = $(':input[name=password]').val(); // parola scrisa de mine
 		$pass_db = $(':hidden[name=pass]').val();     // parola din baza de date
-		//confirm($pass_db);
-		//confirm($data);
-		//confirm($(".confpass").val());
+		
+    $name = $(':input[name=name]').val();
+    $email = $(':input[name=email]').val();
+    $address = $(':input[name=address]').val();
+    confirm($name);
+    confirm($email);
+    confirm($address);
+
+    /* if($('.error_email').is(":hidden") ) {
+     alert("ajax save");
+     $.ajax({
+					type: "POST",
+					url: "/sport_bet/user/personalProfile/"+$name+"/"+$email+"/"+$address,
+				//	data: {id_user:,pass:$acc_pass},
+			   	success: function(data) {
+						confirm("data="+data);
+					},
+					error: function() { alert("error"); }
+				});
+		}*/
+
 
 	
 		if($acc_pass != $pass_db && $acc_pass.length>0) {
@@ -71,10 +95,11 @@ $(document).ready(function() {
 				//event.preventDefault();
 				$('.confpass').next().hide();
 				$('.error_pass').hide();
-	
+	      $id = $(':hidden[name=id_user]').val();
+	      alert($id);
 				$.ajax({
-					type: "POST",
-					url: "/sport_bet/user/setPassword/"+ $(':hidden[name=id_user]')+"/"+$acc_pass,
+					type: "GET",
+					url: "/sport_bet/user/setPassword/"+$id +"/"+$data,
 				//	data: {id_user:,pass:$acc_pass},
 			   	success: function(data) {
 						confirm("data="+data);
@@ -89,10 +114,9 @@ $(document).ready(function() {
 
 
 	</script>
-
-
-
-	<form  action="/sport_bet/user/personalProfile" method="post">
+ 
+<?php //print_r("a "+$user_data);die;?>
+	<form >
 		<fieldset>
 		<legend>Update personal profile</legend>
 		<label>Name

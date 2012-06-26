@@ -8,7 +8,14 @@ class UserModel {
 	public function __construct() {
 		$this->db = new PDO(DB_INFO, DB_USER, DB_PASS);
 	}
-
+  
+  public function getId() {
+  	$sql1 = "select id_user from user where email=?";
+    $stmt = $this->db->prepare($sql1);
+			$stmt->execute(array($_SESSION['user']));
+		$response =	$stmt->fetch();
+		return $response['id_user'];
+  }
 
 	public function getUserData() {
 		$sql = "SELECT id_user,name,address,email,password FROM user WHERE email=?";
@@ -24,8 +31,8 @@ class UserModel {
     	//$m1=$this->sanitizeData($m);
     	//$m1 = array_map('htmlentities',$m);  
 			//print_r(htmlentities());
-    	die(print_r($m)."    ");
-			$sql = "SELECT COUNT(*) AS num_user FROM user WHERE email='$m'";
+    	//die(print_r($m[0])."    ");
+			$sql = "SELECT COUNT(*) AS num_user FROM user WHERE email='$m[0]'";
 			$stmt = $this->db->prepare($sql);
 			$stmt->execute();
 			$response = $stmt->fetch();
@@ -61,12 +68,12 @@ class UserModel {
 	}
 
     public function setPassword($id_user,$pass) {
-    	$sql = "UPDATE user
-               SET   password=?
-              WHERE id_user=?";
-      	$stmt = $this->db->prepare($sql);
-		$stmt->execute(array($p['email'],$id_user));
-		$response = $stmt->fetch();  
+      $sql = "UPDATE user
+        SET   password=?
+        WHERE id_user=?";
+      $stmt = $this->db->prepare($sql);
+      $stmt->execute(array(sha1($pass),$id_user));
+      $response = $stmt->fetch();  
     }
 
 	public function loginUser($_POSTs) {
