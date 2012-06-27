@@ -8,9 +8,9 @@
 
 <div id="match-result">
   <?php
-  	if (!empty($matches)) {
-  		foreach ($matches as $m) :
-  	?>
+    if (!empty($matches)) {
+      foreach ($matches as $m) :
+    ?>
   <form name="form1" method="post" action="/sport_bet/admin/editResult/">
   <table>
     <tr>
@@ -28,12 +28,12 @@
     </tr>
   </table>
 <?php
-	endforeach;
+  endforeach;
 }
 ?>
 <table>
   <tr>
-    <td></td>
+    
     <td>
       <?php
         if (isset($_SESSION['error'])) {
