@@ -1,12 +1,7 @@
 
+<?php include 'tpl/top.php'; ?>
 
- <?php// include_once 'views/tpl/header.php'; ?> 
-
-	<script type="text/javascript" src="/SportBet/javascript/jquery.js"></script>
-	<script>
-
-
-
+<script>
 
 $(document).ready(function() {
 
@@ -54,7 +49,7 @@ $(document).ready(function() {
     $name = $(':input[name=name]').val();
     $email = $(':input[name=email]').val();
     $address = $(':input[name=address]').val();
-    confirm($name);
+   /* confirm($name);
     confirm($email);
     confirm($address);
 
@@ -73,7 +68,7 @@ $(document).ready(function() {
 
 
 	
-		if($acc_pass != $pass_db && $acc_pass.length>0) {
+		if(sha1($acc_pass) != $pass_db && $acc_pass.length>0) {
 			$('.error_pass').show();
 		}
 		else $('.error_pass').hide();
@@ -149,5 +144,6 @@ $(document).ready(function() {
 
 
 
-<?php include 'views/tpl/footer.php'; ?> 
+<!-- bottom -->
+<?php include 'tpl/bottom.php'; ?>
 

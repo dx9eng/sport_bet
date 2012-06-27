@@ -24,7 +24,6 @@ class admin {
 	}
 
 	public function addMatch($params) {
-		
 		global $errors;
 		$_SESSION['error'] = NULL;
 

@@ -1,5 +1,8 @@
+<?php include 'tpl/top.php'; ?>
+<link rel="stylesheet" type="text/css" href="/sport_bet/css/table.css" />
+<link rel="stylesheet" type="text/css" href="/sport_bet/javascript/datetime.js" />
 
-	<script type="text/javascript" src="/SportBet/javascript/jquery.js"></script>
+<!--	<script type="text/javascript" src="/SportBet/javascript/jquery.js"></script> -->
 	<script>
 
 
@@ -10,18 +13,26 @@ $(document).ready(function() {
 
 	$('button[name=Save]').click(function(event){
 		//alert($('select').val()==1);
-
+  
+	alert($('#td-d').html());
+	var now = new Date();
+  var strDate = now.getFullYear() + "-" + (now.getMonth()+1) + "-" + now.getDate();
+  alert(strDate); 
+  
+      // confirm($('table.#td-d').html());
+   
     $('select').each(function() {
    		var currentSelect = $(this);
-   		alert($(this).val());
-   		//alert($(this).val()!="none");
-   		alert($(this).attr('id'));
+   		
+   		//alert($(this).val());
+   		//alert($(this).attr('id'));
   		if($(this).val()!="none") {
 	  		$.ajax({
 					type: "POST",
 					url: "/sport_bet/user/makeBet/"+$(this).attr('id')+"/"+$(this).val(),
 					success: function(data) {
-						confirm("data="+data);
+						location.reload();
+						//confirm("data="+data);
 					},
 					error: function() { alert("error"); }
 				});
@@ -38,10 +49,12 @@ $(document).ready(function() {
 	</script>
 
 
+<div id="match-result">
+<h1>Latest bets!</h1>	</br>
 	<?php if(!empty($bets)) {
 		foreach ($bets as $row) :
 	?>		
-	 <table cellpadding="0" cellspacing="0">
+	 <table cellpadding="0" cellspacing="0" id="show">
 	    <tr>
 	      <td id="td-d"><?php echo $row['match_day']; ?></td>
 	      <th id="td-m"><?php echo $row['team1'] . " vs. " . $row['team2']."  "; ?></th>
@@ -55,11 +68,12 @@ $(document).ready(function() {
 else {
 	 echo "No available bets!";
 }?>
-
+</div>
 
 
 
 <div id="match-result">
+		<h1>Latest matches that you can bet!</h1>	</br>	
 	<?php if(!empty($matches)) {
 		foreach ($matches as $row) :
 			$drop = " <select id='$row[id_match]'>
@@ -69,12 +83,12 @@ else {
 					<option value='X'>X</option>
 					</select>";
 		    ?>
-			
+	
 	 <table cellpadding="0" cellspacing="0">
 	    <tr>
-	      <td id="td-d"><?php echo $row['match_day']; ?></td>
-	      <th id="td-m"><?php echo $row['team1'] . " vs. " . $row['team2']; ?></th>
-	      <td id="td-r"><?php echo $drop; ?></td>
+	      <td id="td-d"><?php echo $row['match_day']."   "; ?></td>
+	      <th id="td-m"><?php echo $row['team1'] . " vs. " . $row['team2']."   "; ?></th>
+	      <td id="td-r"><?php echo $drop."  "; ?></td>
 	    </tr>
 	 </table>
 	<?php endforeach; ?>
@@ -84,10 +98,12 @@ else {
 else {
 	 echo "No available bets for now! Please come back later!";
 }?>
-</div>
 
 </br>
 <button type="submit" name="Save">Save Bets!</button> 
-<?php
+</div>
 
-?>
+
+
+<!-- bottom -->
+<?php include 'tpl/bottom.php'; ?>

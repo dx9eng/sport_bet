@@ -22,7 +22,9 @@ class UserModel {
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute(array($_SESSION['user']));
 		$response = $stmt->fetch();
+		//print_r($response);die;
 		return $response;
+
 		
 	}
 	
@@ -55,12 +57,13 @@ class UserModel {
 }
 
 	public function updateData($p) {
+		print_r($p);die;
 		if($p['email'] != $_SESSION['user']) {
 			$_SESSION['user'] = $p['email'];
 		}
 	  $sql = "UPDATE user
-            SET name=?,address=?,email=?
-            WHERE id_user=?";
+              SET name=?,address=?,email=?
+              WHERE id_user=?";
       	$stmt = $this->db->prepare($sql);
 		$stmt->execute(array($p['name'],$p['address'],$p['email'],$p['id_user']));
 		$response = $stmt->fetch();  
@@ -68,19 +71,24 @@ class UserModel {
 	}
 
     public function setPassword($id_user,$pass) {
-      $sql = "UPDATE user
-        SET   password=?
-        WHERE id_user=?";
+    	$sql = "UPDATE user
+               SET   password=?
+              WHERE id_user=?";
       $stmt = $this->db->prepare($sql);
-      $stmt->execute(array(sha1($pass),$id_user));
-      $response = $stmt->fetch();  
+      //print_r($id_user." ".$pass);die();
+			$stmt->execute(array(sha1($pass),$id_user));
+			$response = $stmt->fetch();  
     }
 
 	public function loginUser($_POSTs) {
    
 		global $errors;
 
+<<<<<<< HEAD
    	$sql = "SELECT account_type,COUNT(*) AS num_users FROM user WHERE email=? AND password=SHA1(?)";
+=======
+   	$sql = "SELECT account_type,COUNT(*) AS num_users FROM user WHERE email=? AND password=sha1(?)";
+>>>>>>> Take available bets. Get user bets.
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute(array($_POSTs['useremail'], $_POSTs['password']));
 		$response = $stmt->fetch();
