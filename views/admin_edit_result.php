@@ -2,7 +2,7 @@
 <?php include 'tpl/top.php'; ?>
 
 <!-- content -->
-Edit Match Results
+<p><h1>Edit Match Results</h1></p>
 <!-- Edit Match form-->
 <link rel="stylesheet" type="text/css" href="/sport_bet/css/table.css" />
 
@@ -11,17 +11,47 @@ Edit Match Results
   	if (!empty($matches)) {
   		foreach ($matches as $m) :
   	?>
-  <table cellpadding="0" cellspacing="0">
+  <form name="form1" method="post" action="/sport_bet/admin/editResult/">
+  <table>
     <tr>
-      <td id="td-d"><?php $format = "d-m-Y H:i"; echo $t = date($format, strtotime($m['match_day'])); ?></td>
-      <th id="td-m"><?php echo $m['team1'] . " vs. " . $m['team2']; ?></th>
-      <td id="td-r"><?php echo $m['score_team1'] . ' - ' . $m['score_team2']; ?></td>
+      <td id="td-d">
+        <?php $format = "d-m-Y H:i"; echo $t = date($format, strtotime($m['match_day'])); ?>
+      </td>
+      <th id="td-m">
+        <?php echo $m['team1'] . " vs. " . $m['team2']; ?>
+      </th>
+      <td id="td-r">
+        <input name="score_team1" type="text" id="res">
+        <?php echo ' - '; ?>
+        <input name="score_team2" type="text" id="res">
+      </td>
     </tr>
   </table>
 <?php
 	endforeach;
 }
 ?>
+<table>
+  <tr>
+    <td></td>
+    <td>
+      <?php
+        if (isset($_SESSION['error'])) {
+          echo $_SESSION['error'];
+        }
+        else {
+          echo "...";
+        }
+        ?>
+    </td>
+    <td></td>
+    <td><input type="reset" name="Reset" value="Clear Results"></td>
+    <td></td>
+    <td><input type="submit" name="SubmitResults" value="Save Results"></td>
+  </tr>
+</table>
+</form>
+
 </div>
 
 

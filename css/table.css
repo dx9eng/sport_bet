@@ -16,19 +16,25 @@ border-bottom: 3px solid #DDDDAA;
 }
 
 #td-d {
-    width: 150px;
+    width: 130px;
     padding: 1px 1px;
 }
 #td-m {
-    width: 300px;
+    width: 280px;
     padding: 1px 1px;
 }
 #td-r {
     width: 50px;
     padding: 1px 1px;
 }
-table tr:hover {
+
+table tr.h:hover {
 background-color: #c00;
 color: #fff;
 cursor:url("/sport_bet/inc/spo61.cur"), pointer;
+}
+
+#res {
+    width: 15px;
+    padding: 1px 1px;
 }
