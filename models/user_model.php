@@ -73,7 +73,7 @@ class UserModel {
    
 		global $errors;
 
-   	$sql = "SELECT account_type,COUNT(*) AS num_users FROM user WHERE email=? AND password=?";
+   	$sql = "SELECT account_type,COUNT(*) AS num_users FROM user WHERE email=? AND password=SHA1(?)";
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute(array($_POSTs['useremail'], $_POSTs['password']));
 		$response = $stmt->fetch();
@@ -119,11 +119,7 @@ class UserModel {
 		return $e;
 	}
 
-	public function insertUser($p) {
-
-		$name = htmlentities(strip_tags($p['name']),ENT_QUOTES);
-		$email = htmlentities(strip_tags($p['email']),ENT_QUOTES);
-		$password = htmlentities(strip_tags($p['password']),ENT_QUOTES);
+	public function insertUser($name, $email, $password) {
 
 		$sql = "INSERT INTO user (name, email, password, account_type) VALUES (?, ?, ?, 1)";
 		if ($stmt = $this->db->prepare($sql)) {

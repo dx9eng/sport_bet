@@ -116,10 +116,10 @@ class admin {
 					$_SESSION['error'] = 'Email is already in use';
 				}
 				elseif ($user_email[0] != $email) {
-				 $user = $user_model->insertUser($_POST);
-				 $_SESSION['error'] = NULL;
-				 $_POST['name'] = $_POST['password'] = $_POST['email'] = NULL;
-				 // session_destroy();
+					$user = $user_model->insertUser($name, $email, $password);
+					$_SESSION['error'] = NULL;
+				 	$_POST['name'] = $_POST['password'] = $_POST['email'] = NULL;
+				 	// session_destroy();
 				}
 			}
 			include 'views/admin_add_user.php';
