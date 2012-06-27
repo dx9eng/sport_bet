@@ -7,26 +7,35 @@
 	<link rel="stylesheet" type="text/css" href="/sport_bet/css/jquery-calendar.css" />
 	<script type="text/javascript">
 	$(document).ready(function () {
-		$("#calendar1, #calendar2").calendar();
-		$("#calendar1_alert").click(function(){alert(popUpCal.parseDate($('#calendar1').val()))});
+		$("#match_day, #calendar2").calendar();
+		//$("#match_day_alert").click(function(){alert(popUpCal.parseDate($('#match_day').val()))});
 	});
 	</script>
 </head>
 	<!-- -->
 	<!-- Add match form -->
 	<div>
-		<form >
-			<fieldset id="match">
-				<legend>Add match</legend>
-				<legend>First Team</legend>
-				<input type="text" id="team1" class=""/>
-				<legend>Second Team</legend>
-				<input type="text" id="team2" class=""/>
-				<legend>Pick date</legend>
-				<input type="text" id="calendar1" class="calendarFocus"/>
-				<input type="submit" name="submit" value="Add Match">
-				<input type="submit" name="submit" value="Cancel" />
-			</fieldset>
+		<form name="form2" method="post" action="/sport_bet/admin/addMatch/">
+			<table>
+				<tr>
+					<td>First Team</td>
+					<td><input name="team1" type="text" id="team1"></td>
+				</tr>
+				<tr>
+					<td>Second Team</td>
+					<td><input name="team2" type="text" id="team2"></td>
+				</tr>
+				<tr>
+					<td>Match Date and Time</td>
+					<td><input name="match_day" type="text" id="match_day" class="calendarFocus"></td>
+				</tr>
+				<tr>
+					<td>
+						<input type="submit" name="Submit" value="Add Match">
+						<input type="reset" name="Cancel" value="Cancel">
+					</td>
+				</tr>
+			</table>
 		</form>
 	</div>
 	<!-- End Add match form-->

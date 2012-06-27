@@ -21,7 +21,7 @@ var popUpCal = {
 	buttonImageOnly: false, // True if the image appears alone, false if it appears on a button
 	dayNames: ['Su','Mo','Tu','We','Th','Fr','Sa'], // Names of days starting at Sunday
 	monthNames: ['January','February','March','April','May','June','July','August','September','October','November','December'], // Names of months
-	dateFormat: 'DMY/', // First three are day, month, year in the required order, fourth is the separator, e.g. US would be 'MDY/'
+	dateFormat: 'YMD-', // First three are day, month, year in the required order, fourth is the separator, e.g. US would be 'MDY/'
 	yearRange: '-10:+10', // Range of years to display in drop-down, either relative to current year (-nn:+nn) or absolute (nnnn:nnnn)
 	changeMonth: true, // True if month can be selected directly, false if only prev/next
 	changeYear: true, // True if year can be selected directly, false if only prev/next

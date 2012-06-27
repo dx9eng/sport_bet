@@ -24,35 +24,33 @@ class admin {
 	}
 
 	public function addMatch($params) {
+		
 		global $errors;
 		$_SESSION['error'] = NULL;
-		$error = NULL;
-		
-		// Instantiate model
+
+		// Instantiate user model
 		include_once 'models/match_model.php';
 		$match_model = new match;
-		// print_r($params); die;
-		// Retrieve
-		$last = $match_model->getUnfinished();
-		//print_r($match_model->getUnfinished()); die;
-		
-		if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['submit'] == 'Add Match') {
-					if ($_SESSION['error'] == NULL) {
-						print_r($match_model); die;
-						$matches = $match_model->saveMatch($_POST);
-					}
-				}
 
 		if (isset($_SESSION['admin'])) {
+			if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['Submit'] == 'Add Match') {
+			// escape all
+			$team1 = mysql_real_escape_string($_POST['team1']);
+			$team2 = mysql_real_escape_string($_POST['team2']);
+			$match = mysql_real_escape_string($_POST['match_day']);
+			//print_r($_POST['team1']); print_r($_POST['team2']); print_r($match); die;
+			$matches = $match_model->saveMatch($_POST);
+		}
+			$last = $match_model->getUnfinished();
 			include 'views/admin_add_match.php';
 		}
+
 		elseif (isset($_SESSION['user'])) {
 			header('Location: /sport_bet/user/');
 		}
 		else {
 			header('Location: /sport_bet/home/');
 		}
-
 	}
 
 	public function editResult() {
