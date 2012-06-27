@@ -14,26 +14,22 @@ $(document).ready(function() {
 	$('button[name=Save]').click(function(event){
 		//alert($('select').val()==1);
   
-			var today=new Date();
-			var h=today.getHours();
-			var m=today.getMinutes();
-			var s=today.getSeconds();
-			// add a zero in front of numbers<10
-			m=checkTime(m);
-			s=checkTime(s);
-
-				alert($('#td-d').html());
-			
-			  var strDate = today.getDate() + "-" + (today.getMonth()+1) + "-" + today.getYear();
-			  alert(strDate); 
-			  alert(h+":"+m+":"+s);
-			  
+		
+			 // alert(h+":"+m+":"+s);
+		
+        var nd = $('table.show').find('#td-d').html();
+				alert(nd);
+			  var today = new Date();
+			  var twoDigitMonth = ((today.getMonth().length+1) === 1)? (today.getMonth()+1) : '0' + (today.getMonth()+1);
+			  var strDate = today.getDate() + "-" + (twoDigitMonth) + "-" + today.getFullYear()+" "+today.getHours()+":"+(today.getMinutes()-5)+":"+today.getSeconds();
+			  alert(strDate);	 
+			  alert(nd=='30-06-2012 10:48:58');
       // confirm($('table.#td-d').html());
    
     $('select').each(function() {
    		var currentSelect = $(this);
    		
-   		//alert($(this).val());
+   		alert($(this).val());
    		//alert($(this).attr('id'));
   		if($(this).val()!="none") {
 	  		$.ajax({
@@ -102,7 +98,7 @@ else {
 	 $d = date($format, strtotime($row['match_day']));
 	 ?>
 	
-	 <table cellpadding="0" cellspacing="0">
+	 <table cellpadding="0" cellspacing="0" class="show">
 	    <tr>
 	      <td id="td-d"><?php echo $d."   "; ?></td>
 	      <th id="td-m"><?php echo $row['team1'] . " vs. " . $row['team2']."   "; ?></th>

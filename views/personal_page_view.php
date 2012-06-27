@@ -1,5 +1,6 @@
 
 <?php include 'tpl/top.php'; ?>
+<script type="text/javascript" src="/sport_bet/javascript/jQuery.encoding.digests.sha1.js"></script>
 
 <script>
 
@@ -46,20 +47,48 @@ $(document).ready(function() {
     }
 	});//  end focusout
 
+
+  /*password compare with database */
+
+ $(':input[name=password]').focusout(function() {
+  alert("p");
+
+    $.ajax({
+          type: "GET",
+          url: "/sport_bet/user/comparePasswords/"+$pass_db+"/"+$acc_pass,
+          success: function(data) {
+             confirm("data="+data);
+           /* if(data=="false") {
+              $('.error_pass').show();
+            }
+            else {
+              $('.error_pass').hide();
+            }*/
+           
+          },
+          error: function() { alert("error"); }
+        });
+  });
+
+ /*
+    Click save
+ */
+
 	$(':submit[value=Save]').click(function(event){
 			//confirm("wrong password");
 		$data = $(':input[name=new_password]').val();
 		$acc_pass = $(':input[name=password]').val(); // parola scrisa de mine
 		$pass_db = $(':hidden[name=pass]').val();     // parola din baza de date
-		 confirm($pass_db);
+		confirm($pass_db);
+  
 
-    $name = $(':input[name=name]').val();
+   /* $name = $(':input[name=name]').val();
     $email = $(':input[name=email]').val();
     $address = $(':input[name=address]').val();
     confirm($name);
     confirm($email);
     confirm($address);
-
+  
 
      /*if($('.error_email').is(":hidden") ) {
      alert("ajax save");
@@ -78,17 +107,20 @@ $(document).ready(function() {
 	
 		if($acc_pass != $pass_db && $acc_pass.length>0) {
 			$('.error_pass').show();
+      event.preventDefault();
 		}
 		else $('.error_pass').hide();
 
 		if($acc_pass.length==0 && $data.length>0 && $(".confpass").length>0 ) {
-			$('.error_pass').show(); 
+			$('.error_pass').show();
+     // event.preventDefault(); 
 		}
 
 		if($data != $(".confpass").val() && $data.length>0 && $(".confpass").length>0) {
 			// $('.error').hide();
 			$('.confpass').next().show();
 			confirm("diff");
+      //event.preventDefault();
 		}
 		else {
 			$('.confpass').next().hide();

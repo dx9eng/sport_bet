@@ -6,6 +6,7 @@
 <link rel="stylesheet" type="text/css" href="/sport_bet/css/style.css" />
 <script type="text/javascript" src="/sport_bet/javascript/jquery.js"></script>
 <script type="text/javascript" src="/sport_bet/javascript/jquery-calendar.js"></script>
+<script type="text/javascript" src="/sport_bet/javascript/jQuery.encoding.digests.sha1.js"></script>
 </head>
 <body>
   <script language="javascript">
