@@ -14,11 +14,20 @@ $(document).ready(function() {
 	$('button[name=Save]').click(function(event){
 		//alert($('select').val()==1);
   
-	alert($('#td-d').html());
-	var now = new Date();
-  var strDate = now.getFullYear() + "-" + (now.getMonth()+1) + "-" + now.getDate();
-  alert(strDate); 
-  
+			var today=new Date();
+			var h=today.getHours();
+			var m=today.getMinutes();
+			var s=today.getSeconds();
+			// add a zero in front of numbers<10
+			m=checkTime(m);
+			s=checkTime(s);
+
+				alert($('#td-d').html());
+			
+			  var strDate = today.getDate() + "-" + (today.getMonth()+1) + "-" + today.getYear();
+			  alert(strDate); 
+			  alert(h+":"+m+":"+s);
+			  
       // confirm($('table.#td-d').html());
    
     $('select').each(function() {
@@ -48,6 +57,11 @@ $(document).ready(function() {
 
 	</script>
 
+<?php
+    $format = "d-m-Y H:i:s"; 
+	 $now = date($format); 
+	?>
+   <p>Date and time:<?php echo $now; ?></p>
 
 <div id="match-result">
 <h1>Latest bets!</h1>	</br>
@@ -83,10 +97,14 @@ else {
 					<option value='X'>X</option>
 					</select>";
 		    ?>
+	<?php
+	
+	 $d = date($format, strtotime($row['match_day']));
+	 ?>
 	
 	 <table cellpadding="0" cellspacing="0">
 	    <tr>
-	      <td id="td-d"><?php echo $row['match_day']."   "; ?></td>
+	      <td id="td-d"><?php echo $d."   "; ?></td>
 	      <th id="td-m"><?php echo $row['team1'] . " vs. " . $row['team2']."   "; ?></th>
 	      <td id="td-r"><?php echo $drop."  "; ?></td>
 	    </tr>

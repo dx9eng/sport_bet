@@ -55,14 +55,16 @@ class UserModel {
 }
 
 	public function updateData($p) {
+		//print_r($p);die;
 		if($p['email'] != $_SESSION['user']) {
 			$_SESSION['user'] = $p['email'];
 		}
+		$idd = $this->getId();
 	  $sql = "UPDATE user
             SET name=?,address=?,email=?
             WHERE id_user=?";
-      	$stmt = $this->db->prepare($sql);
-		$stmt->execute(array($p['name'],$p['address'],$p['email'],$p['id_user']));
+    $stmt = $this->db->prepare($sql);
+		$stmt->execute(array($p['name'],$p['address'],$p['email'],$idd));
 		$response = $stmt->fetch();  
 
 	}

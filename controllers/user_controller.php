@@ -43,14 +43,14 @@ class user {
 		include_once 'views/make_bet_view.php';
    }
 
-    public function personalProfile() {
+    public function personalProfile($p) {
     	
-    	
+    	// print_r($p);die;
       include_once 'models/user_model.php';
 		  $user_model = new UserModel;
 
     	if($_SERVER['REQUEST_METHOD'] == 'POST') {
-         
+          // print_r($_POST);die;
            $user_model->updateData($_POST);
 
            $user_data = $user_model->getUserData();

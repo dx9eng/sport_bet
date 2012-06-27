@@ -13,8 +13,10 @@ $(document).ready(function() {
 	//alert("a");
 
 	$(':input[name=email]').focusout(function() {
+     $(':submit[value=Save]').attr("disabled", false);
 		$new_email = $(':input[name=email]').val();
 		//confirm($new_email);
+
 		if($new_email != $(':hidden[name=email]').val()) {
 			//confirm($new_email);
 			$.ajax({
@@ -25,12 +27,12 @@ $(document).ready(function() {
 				success: function(data) {
 					// alert(data);
 					 if(data == "false") {
-					 	
-
              $('.error_email').hide();
+             $(':submit[value=Save]').attr("disabled", false);
            }
            else {
            	 $('.error_email').show();
+             $(':submit[value=Save]').attr("disabled", true);
            	}
 				},
 				error: function(data) {
@@ -38,6 +40,10 @@ $(document).ready(function() {
 				} 
 			});
 		}
+    else {
+      $('.error_email').hide();
+      $(':submit[value=Save]').attr("disabled", false);
+    }
 	});//  end focusout
 
 	$(':submit[value=Save]').click(function(event){
@@ -45,19 +51,21 @@ $(document).ready(function() {
 		$data = $(':input[name=new_password]').val();
 		$acc_pass = $(':input[name=password]').val(); // parola scrisa de mine
 		$pass_db = $(':hidden[name=pass]').val();     // parola din baza de date
-		
+		 confirm($pass_db);
+
     $name = $(':input[name=name]').val();
     $email = $(':input[name=email]').val();
     $address = $(':input[name=address]').val();
-   /* confirm($name);
+    confirm($name);
     confirm($email);
     confirm($address);
 
-    /* if($('.error_email').is(":hidden") ) {
+
+     /*if($('.error_email').is(":hidden") ) {
      alert("ajax save");
      $.ajax({
 					type: "POST",
-					url: "/sport_bet/user/personalProfile/"+$name+"/"+$email+"/"+$address,
+					url: "/sport_bet/user/personalProfile/"+$name+"/"+$email+"/"+$address+"/",
 				//	data: {id_user:,pass:$acc_pass},
 			   	success: function(data) {
 						confirm("data="+data);
@@ -68,7 +76,7 @@ $(document).ready(function() {
 
 
 	
-		if(sha1($acc_pass) != $pass_db && $acc_pass.length>0) {
+		if($acc_pass != $pass_db && $acc_pass.length>0) {
 			$('.error_pass').show();
 		}
 		else $('.error_pass').hide();
@@ -103,15 +111,15 @@ $(document).ready(function() {
 				});
 			}//end if
 		}
-		event.preventDefault();
+	//	event.preventDefault();
 	}); //end click
 });
 
 
 	</script>
  
-<?php //print_r("a "+$user_data);die;?>
-	<form >
+
+	<form action="/sport_bet/user/personalProfile" method="post">
 		<fieldset>
 		<legend>Update personal profile</legend>
 		<label>Name
