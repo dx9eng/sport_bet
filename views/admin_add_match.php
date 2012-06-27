@@ -45,6 +45,7 @@
 	</p>
 	<div id="match-result">
 		<?php
+		if (!empty($last)) {
 			$i = 0;
 			foreach ($last as $l) :
 				if ($i == 5) {
@@ -60,6 +61,7 @@
 		<?php
 			$i++;
 			endforeach;
+		}
 		?>
 	</div>
 <!-- End Display last matches added -->

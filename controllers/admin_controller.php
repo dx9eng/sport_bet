@@ -56,8 +56,12 @@ class admin {
 	public function editResult() {
 
 		// Instantiate match model
+		include_once 'models/match_model.php'; 
+		$match_model = new match;
+
 		// Retrieve the match
 		if (isset($_SESSION['admin'])) {
+			$matches = $match_model->getUnfinished();
 			include 'views/admin_edit_result.php';
 		}
 		elseif (isset($_SESSION['user'])) {
