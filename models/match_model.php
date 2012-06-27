@@ -58,8 +58,18 @@ class match {
 		}
 	}
 
-	public function editMatchResult() {
-		
+public function editMatchResults($score_team1, $score_team2, $result, $id_match) {
+
+		$sql = "INSERT INTO matches (score_team1, score_team2, result) VALUES (?, ?, ?) WHERE id_match = ?";
+		if ($stmt = $this->db->prepare($sql)) {
+			$stmt->execute(array($score_team1, $score_team2, $result, $id_match));
+			$stmt->closeCursor();
+			return;
+		}
+		else {
+			$_SESSION['error'] = 'No data inserted';
+			return;
+		}
 	}
 
 }

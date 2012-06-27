@@ -53,7 +53,9 @@ class admin {
 		}
 	}
 
-	public function editResult() {
+	public function editResult($params) {
+		global $errors;
+		$_SESSION['error'] = NULL;
 
 		// Instantiate match model
 		include_once 'models/match_model.php'; 
@@ -61,6 +63,38 @@ class admin {
 
 		// Retrieve the match
 		if (isset($_SESSION['admin'])) {
+			if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['SubmitResults'] == 'Save Results') {
+				$score_team1 = mysql_real_escape_string($_POST['score_team1']);
+				$score_team2 = mysql_real_escape_string($_POST['score_team2']);
+				//$result = mysql_real_escape_string($_POST['result']);
+				//$id_match = $_POST['id_match'];
+				//print_r($score_team1); die;
+				if (!isset($_POST['score_team1'])) {
+					$_SESSION['error'] = 'Insert score for first team';
+				}
+				elseif (!isset($_POST['score_team2'])) {
+					$_SESSION['error'] = 'Insert score for second team';
+				}
+				elseif (!is_numeric($_POST['score_team1'])) {
+					$_SESSION['error'] = 'Invalid score for first team';
+				}
+				elseif (!is_numeric($_POST['score_team2'])) {
+					$_SESSION['error'] = 'Invalid score for second team';
+				}
+				elseif (is_numeric($_POST['score_team1'] && is_numeric($_POST['score_team2']))) {
+					if ($_POST['score_team1']  == $_POST['score_team2']) {
+						$result = 'x';
+					}
+					elseif ($_POST['score_team1']  > $_POST['score_team2']) {
+						$result = '1';
+					}
+					elseif ($_POST['score_team1']  < $_POST['score_team2']) {
+						$result = '2';
+					}
+					print_r($match_model); die;
+					$matches = $match_model->editMatchResults($score_team1, $score_team2, $result, $id_match);
+				}
+			}
 			$matches = $match_model->getUnfinished();
 			include 'views/admin_edit_result.php';
 		}
