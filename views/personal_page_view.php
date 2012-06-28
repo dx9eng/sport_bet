@@ -161,8 +161,7 @@ $(document).ready(function() {
 	 </form>
 
 <?php
-//var_dump($GLOBALS['error'][1]);
- echo "11 ".$GLOBALS["error"][1]." aaa";
+
  if(isset($_SESSION['error']))
     echo $GLOBALS['error'][$_SESSION['error']];
 ?>

@@ -25,8 +25,9 @@ $(document).ready(function() {
 					type: "POST",
 					url: "/sport_bet/user/makeBet/"+$(this).attr('id')+"/"+$(this).val(),
 					success: function(data) {
-						location.reload();
 						//confirm("data="+data);
+						location.reload();
+						//
 					},
 					error: function() { alert("error"); }
 				});

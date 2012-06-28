@@ -24,7 +24,7 @@ class user {
 	}
 
    public function makeBet($p) {
-      //print_r($p);die;
+    //print_r($p);die;
     include_once 'models/bet_model.php';
     $bet_model = new bet;
     $matches = $bet_model->makeBet($p);

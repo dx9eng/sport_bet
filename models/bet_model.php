@@ -36,21 +36,19 @@ class bet {
 	}
 
 	public function makeBet($p) {
-		//print_r($_SESSION['user']);die;
-		
-    //print_r($response);die;
-    //select 
-    $sql = "INSERT INTO bet (id_user,id_match,bet_option) VALUES (?, ?, ?)";
-		  $stmt = $this->db->prepare($sql);
-			$stmt->execute(array($this->id, $p[0], $p[1]));
-			$count = $stmt->rowCount();
+		//print_r($p);die;
+		include_once 'models/user_model.php';
+		$user_model = new UserModel;
+    $idd = $user_model->getId();
+		$sql = "INSERT INTO bet (id_user,id_match,bet_option) VALUES (?, ?, ?)";
+		if($stmt = $this->db->prepare($sql)) {
+			$stmt->execute(array($idd, $p[0], $p[1]));
 			$stmt->closeCursor();
-		if($count!=0) {
-			 	header('Location: /sport_bet/user/takeAvailableBets/error');
+			header('Location: /sport_bet/user/takeAvailableBets');
 		//	$this->getUserBets();
  		}
  		else {
-       	header('Location: /sport_bet/user/takeAvailableBets');
+       print_r("error");
  		}
  	}
    /*
@@ -61,7 +59,7 @@ class bet {
 	    include_once 'models/user_model.php';
 			$user_model = new UserModel;
     	$idd = $user_model->getId();
-    	
+
       $sql = "SELECT matches.id_match,matches.team1,matches.team2,matches.match_day,bet.bet_option
 						 from bet, matches	where bet.id_match=matches.id_match and bet.id_user='$idd' 
 						 Order by matches.match_day desc limit 10";
