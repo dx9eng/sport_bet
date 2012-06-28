@@ -11,6 +11,10 @@ class home {
 		// Retrieve list of entries
 		$matches = $match_model->getAllMatches();
 		
+    include_once 'models/bet_model.php';
+    $bet_model = new bet;
+    $top = $bet_model->getUserTopBets();
+
 		// Include view
 		if (isset($_SESSION['admin'])) {
 			header('Location: /sport_bet/admin/');
@@ -21,6 +25,7 @@ class home {
 		else {
 			include 'views/index_login_view.php';
 		}
+
 	}
 
 	public function login() {
@@ -69,5 +74,13 @@ class home {
 		session_destroy();
 		header('Location: /sport_bet/home/');
 	}
+
+
+  public function topBets() {
+    include_once 'models/bet_model.php';
+    $bet_model = new bet;
+    $top = $bet_model->getUserTopBets();
+    include_once 'views/top_view.php';
+  }
 }
 ?>

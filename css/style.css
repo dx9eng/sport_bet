@@ -171,3 +171,11 @@ table {
     table-layout: fixed;
     margin: 0px 0px 0px 0px;
 }
+
+#top {
+    width: 230px;
+    border: 0px;
+    text-align: center;
+    table-layout: fixed;
+    margin: 0px 0px 0px 0px;
+}

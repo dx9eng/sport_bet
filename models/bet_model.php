@@ -6,15 +6,16 @@ class bet {
 
 	public function __construct() {
 		$this->db = new PDO(DB_INFO, DB_USER, DB_PASS);
-		include_once 'models/user_model.php';
-		$user_model = new UserModel;
-    $this->id = $user_model->getId();
+		
 	}
 
 
     // all the matches that the user can bet on
     public function takeAvailableBets() {
-    $idd = $this->id;
+    include_once 'models/user_model.php';
+		$user_model = new UserModel;
+    $idd = $user_model->getId();
+
 		$sql = "SELECT * from matches WHERE not exists 
 						(select * from bet where bet.id_user='$idd' and matches.id_match=bet.id_match)
 						and matches.match_day > NOW()
@@ -57,7 +58,10 @@ class bet {
    from bet these are the ones that don't have  bet option
    */
 	public function getUserBets(){
-	    $idd = $this->id;
+	    include_once 'models/user_model.php';
+			$user_model = new UserModel;
+    	$idd = $user_model->getId();
+    	
       $sql = "SELECT matches.id_match,matches.team1,matches.team2,matches.match_day,bet.bet_option
 						 from bet, matches	where bet.id_match=matches.id_match and bet.id_user='$idd' 
 						 Order by matches.match_day desc limit 10";
@@ -71,6 +75,47 @@ class bet {
 	public function setBetResult() {
 		
 	}
+
+  public function getUserTopBets() {
+  	$ids = $this->getUsersIds();
+  	foreach($ids as $idd) {
+  		$arr = $this->getSuccessBet($idd['id_user']);
+      $succes= array();
+      if(!empty($arr)) {
+			  	foreach($arr as $succ) {
+			  		//var_dump($succ['success']);
+			  		$succ = intval($succ['success']);
+			  		//var_dump(intval($succ));
+			  		array_push($succes, $succ);
+			  	}
+				
+		  	$all[array_sum($succes)] = $idd['name'];
+				}  	
+	  }
+  
+  	$result = krsort($all);
+  	//var_dump($all);
+  	return $all;
+  }
+
+  private function getUsersIds() {
+    $sql = "SELECT id_user,`name` from user where account_type=1";
+		$stmt = $this->db->prepare($sql);
+		$stmt->execute();
+		$rsp = $stmt->fetchAll();
+		//print_r($rsp);die;
+		return $rsp;
+  }
+
+  private function getSuccessBet($idd) {
+  	$sql = "SELECT bet.success from bet where id_user= '$idd' ";
+		$stmt = $this->db->prepare($sql);
+		//$stmt->bindParam(':idd',$idd, PDO::PARAM_INT);
+		$stmt->execute();
+		$rsp = $stmt->fetchAll();
+		//print_r($rsp);die;
+		return $rsp;
+  }
 
 }
 

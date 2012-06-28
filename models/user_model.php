@@ -10,9 +10,10 @@ class UserModel {
 	}
   
   public function getId() {
+  	//if(isset($_SESSION['user']))
   	$sql1 = "select id_user from user where email=?";
     $stmt = $this->db->prepare($sql1);
-			$stmt->execute(array($_SESSION['user']));
+		$stmt->execute(array($_SESSION['user']));
 		$response =	$stmt->fetch();
 		return $response['id_user'];
   }
@@ -71,7 +72,7 @@ class UserModel {
 					unset($_SESSION['error']);
 					$this->setPassword($p['id_user'],$p['new_password']);
 				}
-	}
+	  }
 		//$idd = $this->getId();
 	  $sql = "UPDATE user
             SET name=?,address=?,email=?
