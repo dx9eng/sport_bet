@@ -162,11 +162,11 @@ $(document).ready(function() {
 	 </form>
 <?php
   if (isset($_SESSION['error']) && $_SESSION['error']==5) {
-     echo 'New passwords incorrect!';
+     echo 'New passwords are not equal!';
   }
-  else {
-     echo "Data added!";
-     unset($_SESSION['error']);
+  elseif (isset($_SESSION['error']) && $_SESSION['error']==6) {
+     echo 'An error ocurred while saving the data!';
+     //unset($_SESSION['error']);
    }
  ?>
 

@@ -57,7 +57,7 @@ $(document).ready(function() {
     $format = "d-m-Y H:i:s"; 
 	 $now = date($format); 
 	?>
-   <p>Date and time:<?php echo $now; ?></p>
+   
 
 <div id="match-result">
 <h1>Latest bets!</h1>	</br>
@@ -95,12 +95,12 @@ else {
 		    ?>
 	<?php
 	
-	 $d = date($format, strtotime($row['match_day']));
+	 //$d = date($format, strtotime($row['match_day']));
 	 ?>
 	
 	 <table cellpadding="0" cellspacing="0" class="show">
 	    <tr>
-	      <td id="td-d"><?php echo $d."   "; ?></td>
+	      <td id="td-d"><?php echo $row['match_day']."   "; ?></td>
 	      <th id="td-m"><?php echo $row['team1'] . " vs. " . $row['team2']."   "; ?></th>
 	      <td id="td-r"><?php echo $drop."  "; ?></td>
 	    </tr>
