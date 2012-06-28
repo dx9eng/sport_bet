@@ -16,8 +16,8 @@ class bet {
 		$user_model = new UserModel;
     $idd = $user_model->getId();
 
-		$sql = "SELECT * from matches WHERE not exists 
-						(select * from bet where bet.id_user='$idd' and matches.id_match=bet.id_match)
+		$sql = "SELECT * from matches WHERE id_match not in 
+						(select id_match from bet where bet.id_user='$idd')
 						and matches.match_day > NOW()
 						ORDER BY matches.match_day desc";
 		$stmt = $this->db->prepare($sql);

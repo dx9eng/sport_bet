@@ -78,7 +78,6 @@ class user {
      else {
     	
 		  $user_data = $user_model->getUserData();
-      //print_r($user_data);die;
 		  include_once 'views/personal_page_view.php';
 	   }
     }

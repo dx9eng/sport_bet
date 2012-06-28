@@ -22,7 +22,7 @@ class UserModel {
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute(array($_SESSION['user']));
 		$response = $stmt->fetch();
-		return $response;
+    return $response;
 		
 	}
 	
