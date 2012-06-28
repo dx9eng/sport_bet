@@ -1,3 +1,9 @@
+<?php
+ include_once 'models/bet_model.php';
+ $bet_model = new bet;
+ $top = $bet_model->getUserTopBets(); 
+?>
+
 <div>
 	<p>
 		<h2>Top users</h2>

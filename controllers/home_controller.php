@@ -20,6 +20,9 @@ class home {
 			header('Location: /sport_bet/admin/');
 		}
 		elseif (isset($_SESSION['user'])) {
+      include_once 'models/bet_model.php';
+      $bet_model = new bet;
+      $top = $bet_model->getUserTopBets();
 			header('Location: /sport_bet/user/');
 		}
 		else {
