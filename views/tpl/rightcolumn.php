@@ -13,7 +13,7 @@
     ?>
       <table class="top" id="top">
         <tr>
-          <td><?php echo $value. " --- " . $key . " points" . '</br>';?> </td>
+          <td><?php echo $key. " --- " . $value . " points" . '</br>';?> </td>
         </tr>
       </table>
     <?php
