@@ -10,7 +10,6 @@ class UserModel {
 	}
   
   public function getId() {
-  	//if(isset($_SESSION['user']))
   	$sql1 = "select id_user from user where email=?";
     $stmt = $this->db->prepare($sql1);
 		$stmt->execute(array($_SESSION['user']));

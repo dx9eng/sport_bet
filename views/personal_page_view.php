@@ -13,10 +13,10 @@ $(document).ready(function() {
 	// confirm($('.error_email').is(":hidden"));
 	//alert("a");
 
-	$(':input[name=email]').focusout(function() {
+	$(':input[name=new_email]').focusout(function() {
      $(':submit[value=Save]').attr("disabled", false);
-		$new_email = $(':input[name=email]').val();
-		//confirm($new_email);
+		$new_email = $(':input[name=new_email]').val();
+		confirm($new_email);
 
 		if($new_email != $(':hidden[name=email]').val()) {
 			//confirm($new_email);

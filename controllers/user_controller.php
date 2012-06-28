@@ -75,7 +75,7 @@ class user {
          header('Location: /sport_bet/user/personalProfile/');
          exit;
         }
-        else {
+     else {
     	
 		  $user_data = $user_model->getUserData();
       //print_r($user_data);die;
