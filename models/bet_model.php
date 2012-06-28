@@ -76,9 +76,11 @@ class bet {
 
   public function getUserTopBets() {
   	$ids = $this->getUsersIds();
+  	$all = array();
   	foreach($ids as $idd) {
   		$arr = $this->getSuccessBet($idd['id_user']);
       $succes= array();
+
       if(!empty($arr)) {
 			  	foreach($arr as $succ) {
 			  		//var_dump($succ['success']);
@@ -87,12 +89,17 @@ class bet {
 			  		array_push($succes, $succ);
 			  	}
 				
-		  	$all[array_sum($succes)] = $idd['name'];
-				}  	
+		  	  //$all[array_sum($succes)] = $idd['name'];
+			  	$one = array();
+			  	$all[$idd['name']] = array_sum($succes);
+			  	//var_dump($one);die;
+          //array_push($all, $one);
+				}  
+				
 	  }
-  
-  	$result = krsort($all);
-  	//var_dump($all);
+  	$result = arsort($all);
+  	//var_dump($all);die;
+  	//var_dump($all);die($result);
   	return $all;
   }
 
