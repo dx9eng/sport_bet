@@ -27,7 +27,7 @@ class match {
 	public function getUnfinished() {
 
 		// Load all matches
-		$sql = "SELECT id_match, team1, team2, match_day, score_team1, score_team2 FROM matches WHERE (score_team1 is NULL) AND (score_team2 is NULL) ORDER BY time DESC";
+		$sql = "SELECT id_match, team1, team2, match_day, score_team1, score_team2 FROM matches WHERE (score_team1 is NULL) AND (score_team2 is NULL) ORDER BY time ASC";
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute(array('last'));
 
@@ -58,9 +58,8 @@ class match {
 		}
 	}
 
-public function editMatchResults($score_team1, $score_team2, $result, $id_match) {
-
-		$sql = "INSERT INTO matches (score_team1, score_team2, result) VALUES (?, ?, ?) WHERE id_match = ?";
+public function editMatchResults($score_team1, $score_team2, $result) {
+		$sql = "UPDATE matches SET score_team1=?, score_team2=?, result=? WHERE id_match=?;";
 		if ($stmt = $this->db->prepare($sql)) {
 			$stmt->execute(array($score_team1, $score_team2, $result, $id_match));
 			$stmt->closeCursor();
