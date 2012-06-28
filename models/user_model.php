@@ -61,18 +61,25 @@ class UserModel {
 		if($p['new_email'] != $_SESSION['user']) {
 			$_SESSION['user'] = $p['new_email'];
 		}
-		if(!empty($p['new_password']) && !empty($p['confpass'])) {
+		if(!empty($p['new_password']) && !empty($p['confpass']) && !empty($p['password'])) {
 				if( $p['new_password'] != $p['confpass']) {
 					//print_r($p);die;
-					 $_SESSION['error']=5;
-					 return;
+					 $_SESSION['error'] = 5;
+					 //return;
 				}
-				else {
+		elseif(!empty($p['new_password']) && !empty($p['confpass']) && empty($p['password'])) {
+        $_SESSION['error'] = 7;
+		}		
+		else {
 					unset($_SESSION['error']);
 					$this->setPassword($p['id_user'],$p['new_password']);
 				}
 	  }
-		//$idd = $this->getId();
+	  if (!preg_match("/^\S+@[\w\d.-]{2,}\.[\w]{2,6}$/iU", $p['new_email'])) {
+				$_SESSION['error'] = 2;
+				return;
+			}
+	
 	  $sql = "UPDATE user
             SET name=?,address=?,email=?
             WHERE id_user=?";
@@ -81,7 +88,7 @@ class UserModel {
 			$response = $stmt->fetch();  
 		}
 		else {
-       $_SESSION['error']=6;
+       $_SESSION['error'] = 6;
 			 return;
 		}
 

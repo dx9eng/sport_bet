@@ -15,22 +15,11 @@ $(document).ready(function() {
 		//alert($('select').val()==1);
   
 		
-			 // alert(h+":"+m+":"+s);
-		
-        var nd = $('table.show').find('#td-d').html();
-				alert(nd);
-			  var today = new Date();
-			  var twoDigitMonth = ((today.getMonth().length+1) === 1)? (today.getMonth()+1) : '0' + (today.getMonth()+1);
-			  var strDate = today.getDate() + "-" + (twoDigitMonth) + "-" + today.getFullYear()+" "+today.getHours()+":"+(today.getMinutes()-5)+":"+today.getSeconds();
-			  alert(strDate);	 
-			  alert(nd=='30-06-2012 10:48:58');
-      // confirm($('table.#td-d').html());
+			 
    
     $('select').each(function() {
    		var currentSelect = $(this);
    		
-   		alert($(this).val());
-   		//alert($(this).attr('id'));
   		if($(this).val()!="none") {
 	  		$.ajax({
 					type: "POST",

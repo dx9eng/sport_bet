@@ -9,12 +9,14 @@ define('DB_PASS', '');
 
 $errors = array(
   1 => '<p class = "error">Please fill the boxes.</p>',
-  2 => '<p class = "error">Login failed! Invalid email.</p>',
+  2 => '<p class = "error"> Invalid email.</p>',
   3 => '<p class = "error">Login failed! Incorect email or password.</p>',
   4 => '<p class = "error">Login failed! Unknown cause.</p>',
   5 => '<p class = "error">New passwords are not equal!</p>',
   6 => '<p class = "error">An error ocurred while saving the data!</p>',
+  7 => '<p class = "error">If you want to change the password, please write present password!</p>',
   );
+$GLOBALS['error']=$errors;
 
 
 ?>

@@ -1,6 +1,5 @@
 
 <?php include 'tpl/top.php'; ?>
-<script type="text/javascript" src="/sport_bet/javascript/jQuery.encoding.digests.sha1.js"></script>
 
 <script>
 
@@ -16,7 +15,7 @@ $(document).ready(function() {
 	$(':input[name=new_email]').focusout(function() {
      $(':submit[value=Save]').attr("disabled", false);
 		$new_email = $(':input[name=new_email]').val();
-		confirm($new_email);
+		//confirm($new_email);
 
 		if($new_email != $(':hidden[name=email]').val()) {
 			//confirm($new_email);
@@ -124,10 +123,10 @@ $(document).ready(function() {
 		
 	}); //end click*/
 
-});//end document ready
+ });//end document ready
 
+</script>
 
-	</script>
  
 
 	<form action="/sport_bet/user/personalProfile" method="post">
@@ -160,15 +159,13 @@ $(document).ready(function() {
 		<input type="hidden" name="email" value="<?php echo $_SESSION['user'] ?>" />
 		</fieldset>
 	 </form>
+
 <?php
-  if (isset($_SESSION['error']) && $_SESSION['error']==5) {
-     echo 'New passwords are not equal!';
-  }
-  elseif (isset($_SESSION['error']) && $_SESSION['error']==6) {
-     echo 'An error ocurred while saving the data!';
-     //unset($_SESSION['error']);
-   }
- ?>
+//var_dump($GLOBALS['error'][1]);
+ echo "11 ".$GLOBALS["error"][1]." aaa";
+ if(isset($_SESSION['error']))
+    echo $GLOBALS['error'][$_SESSION['error']];
+?>
 
 <!-- bottom -->
 <?php include 'tpl/bottom.php'; ?>
