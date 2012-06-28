@@ -31,13 +31,28 @@ class user {
     include_once 'views/make_bet_view.php';
    }
 
+   public function comparePasswords($p) {
+      //print_r(SHA1($p[1]));die;
+      if($p[0]==SHA1($p[1])) echo "true";
+      else echo "false";
+  }
+
+  public function compareNewPasswords($p) {
+      //print_r(SHA1($p[1]));die;
+      if($p[0]==$p[1]) echo "true";
+      else echo "false";
+  }
+
    public function betHistory() {
    	
    }
 
-   public function takeAvailableBets() {
+   public function takeAvailableBets($p=NULL) {
     include_once 'models/bet_model.php';
 		$bet_model = new bet;
+    if(!empty($p)) {
+      $_SESSION['error']='Time has expired!';
+    }
 		$matches = $bet_model->takeAvailableBets();
     $bets = $bet_model->getUserBets();
 		include_once 'views/make_bet_view.php';

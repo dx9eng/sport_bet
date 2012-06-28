@@ -38,16 +38,18 @@ class bet {
 		//print_r($_SESSION['user']);die;
 		
     //print_r($response);die;
-
+    //select 
     $sql = "INSERT INTO bet (id_user,id_match,bet_option) VALUES (?, ?, ?)";
-		if ($stmt = $this->db->prepare($sql)) {
+		  $stmt = $this->db->prepare($sql));
 			$stmt->execute(array($this->id, $p[0], $p[1]));
+			$count = $stmt->rowCount();
 			$stmt->closeCursor();
-			header('Location: /sport_bet/user/takeAvailableBets');
+		if($count!=0) {
+			 	header('Location: /sport_bet/user/takeAvailableBets/error');
 		//	$this->getUserBets();
  		}
  		else {
-       
+       	header('Location: /sport_bet/user/takeAvailableBets');
  		}
  	}
    /*

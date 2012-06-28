@@ -54,6 +54,8 @@ class UserModel {
 	}
 }
 
+
+  
 	public function updateData($p) {
 		//print_r($p);die;
 		if($p['email'] != $_SESSION['user']) {

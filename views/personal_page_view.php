@@ -23,8 +23,6 @@ $(document).ready(function() {
 			$.ajax({
 				type: "GET",
 				url: "/sport_bet/user/mailExists/" + $new_email,
-	//			data: $new_email,                    //data nu se trimite bine
-	//			dataType: 'text',
 				success: function(data) {
 					// alert(data);
 					 if(data == "false") {
@@ -51,101 +49,82 @@ $(document).ready(function() {
   /*password compare with database */
 
  $(':input[name=password]').focusout(function() {
-  alert("p");
-
+  //alert("p");
+  $acc_pass = $(':input[name=password]').val(); // parola scrisa de mine
+  $pass_db = $(':hidden[name=pass]').val();  
+  if($acc_pass.length > 0) { 
     $.ajax({
           type: "GET",
           url: "/sport_bet/user/comparePasswords/"+$pass_db+"/"+$acc_pass,
           success: function(data) {
-             confirm("data="+data);
-           /* if(data=="false") {
+            // confirm("data="+data);
+            if(data == "false") {
               $('.error_pass').show();
+              $(':submit[value=Save]').attr("disabled", true);
             }
             else {
               $('.error_pass').hide();
-            }*/
+              $(':submit[value=Save]').attr("disabled", false);
+            }
            
           },
           error: function() { alert("error"); }
         });
-  });
+  }
+
+});
+
+  /*
+  Focus out last password, Compare new passwords
+  */
+
+   $('.confpass').focusout(function(event){
+    $data = $(':input[name=new_password]').val();
+    confirm($data+" "+$(this).val());
+   // if($acc_pass.length > 0) 
+   { 
+      $.ajax({
+          type: "GET",
+          url: "/sport_bet/user/compareNewPasswords/"+$data+"/"+$(this).val(),
+          success: function(data) {
+             confirm("data="+data);
+            if(data == "false") {
+                $('.confpass').next().show();
+            }
+            else {
+                $('.confpass').next().hide();
+            }
+           
+          },
+          error: function() { alert("error"); }
+        });
+  }
+  
+   });
 
  /*
     Click save
  */
 
 	$(':submit[value=Save]').click(function(event){
-			//confirm("wrong password");
-		$data = $(':input[name=new_password]').val();
-		$acc_pass = $(':input[name=password]').val(); // parola scrisa de mine
-		$pass_db = $(':hidden[name=pass]').val();     // parola din baza de date
-		confirm($pass_db);
-  
-
-   /* $name = $(':input[name=name]').val();
-    $email = $(':input[name=email]').val();
-    $address = $(':input[name=address]').val();
-    confirm($name);
-    confirm($email);
-    confirm($address);
-  
-
-     /*if($('.error_email').is(":hidden") ) {
-     alert("ajax save");
-     $.ajax({
-					type: "POST",
-					url: "/sport_bet/user/personalProfile/"+$name+"/"+$email+"/"+$address+"/",
-				//	data: {id_user:,pass:$acc_pass},
-			   	success: function(data) {
-						confirm("data="+data);
-					},
-					error: function() { alert("error"); }
-				});
-		}*/
-
-
 	
-		if($acc_pass != $pass_db && $acc_pass.length>0) {
-			$('.error_pass').show();
-      event.preventDefault();
-		}
-		else $('.error_pass').hide();
-
-		if($acc_pass.length==0 && $data.length>0 && $(".confpass").length>0 ) {
-			$('.error_pass').show();
-     // event.preventDefault(); 
-		}
-
-		if($data != $(".confpass").val() && $data.length>0 && $(".confpass").length>0) {
-			// $('.error').hide();
-			$('.confpass').next().show();
-			confirm("diff");
-      //event.preventDefault();
-		}
-		else {
-			$('.confpass').next().hide();
-		
-			if($acc_pass == $pass_db){
-				confirm("ajax");
-				//event.preventDefault();
-				$('.confpass').next().hide();
-				$('.error_pass').hide();
+	
+		 
+        $data = $(':input[name=new_password]').val();
 	      $id = $(':hidden[name=id_user]').val();
 	      alert($id);
 				$.ajax({
 					type: "GET",
 					url: "/sport_bet/user/setPassword/"+$id +"/"+$data,
-				//	data: {id_user:,pass:$acc_pass},
 			   	success: function(data) {
 						confirm("data="+data);
 					},
-					error: function() { alert("error"); }
+					error: function() { alert("error submit"); }
 				});
-			}//end if
-		}
-	//	event.preventDefault();
+		
 	}); //end click
-});
+
+});//end document ready
 
 
 	</script>
@@ -171,7 +150,7 @@ $(document).ready(function() {
 		<div><span>New Password </span><input name="new_password" class=""/>
 
 		<div><span>Confirm New Password 
-		</span><input class="confpass" />
+		</span><input class="confpass" name="confpass" />
 		<span class="error"> Password and Confirm Password dont match</span></div>
 		
 		<input type="submit" name="submit" value="Save" />
