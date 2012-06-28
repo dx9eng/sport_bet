@@ -77,7 +77,7 @@ $(document).ready(function() {
   /*
   Focus out last password, Compare new passwords
   */
-
+/*
    $('.confpass').focusout(function(event){
     $data = $(':input[name=new_password]').val();
     confirm($data+" "+$(this).val());
@@ -100,13 +100,13 @@ $(document).ready(function() {
         });
   }
   
-   });
+   });*/
 
  /*
     Click save
  */
 
-	$(':submit[value=Save]').click(function(event){
+/*	$(':submit[value=Save]').click(function(event){
 	
 	
 		 
@@ -117,12 +117,12 @@ $(document).ready(function() {
 					type: "GET",
 					url: "/sport_bet/user/setPassword/"+$id +"/"+$data,
 			   	success: function(data) {
-						confirm("data="+data);
+						confirm("data password="+data);
 					},
 					error: function() { alert("error submit"); }
 				});
 		
-	}); //end click
+	}); //end click*/
 
 });//end document ready
 
@@ -137,7 +137,7 @@ $(document).ready(function() {
 		<input type="text" name="name" maxlength="75" value="<?php echo $user_data['name'] ?>"/>
 		</label>
 		<label><div><span>Email</span>
-		<input type="text" name="email" value="<?php echo $user_data['email'] ?>"/>
+		<input type="text" name="new_email" value="<?php echo $user_data['email'] ?>"/>
 		  <span class="error_email"> Email in use!Please write another email!</span></div>
 		</label>
 		<label>Adress
@@ -160,8 +160,15 @@ $(document).ready(function() {
 		<input type="hidden" name="email" value="<?php echo $_SESSION['user'] ?>" />
 		</fieldset>
 	 </form>
-
-
+<?php
+  if (isset($_SESSION['error']) && $_SESSION['error']==5) {
+     echo 'New passwords incorrect!';
+  }
+  else {
+     echo "Data added!";
+     unset($_SESSION['error']);
+   }
+ ?>
 
 <!-- bottom -->
 <?php include 'tpl/bottom.php'; ?>

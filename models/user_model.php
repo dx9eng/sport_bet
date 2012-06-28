@@ -58,16 +58,32 @@ class UserModel {
   
 	public function updateData($p) {
 		//print_r($p);die;
-		if($p['email'] != $_SESSION['user']) {
-			$_SESSION['user'] = $p['email'];
+		if($p['new_email'] != $_SESSION['user']) {
+			$_SESSION['user'] = $p['new_email'];
 		}
-		$idd = $this->getId();
+		if(!empty($p['new_password']) && !empty($p['confpass'])) {
+				if( $p['new_password'] != $p['confpass']) {
+					//print_r($p);die;
+					 $_SESSION['error']=5;
+					 return;
+				}
+				else {
+					unset($_SESSION['error']);
+					$this->setPassword($p['id_user'],$p['new_password']);
+				}
+	}
+		//$idd = $this->getId();
 	  $sql = "UPDATE user
             SET name=?,address=?,email=?
             WHERE id_user=?";
-    $stmt = $this->db->prepare($sql);
-		$stmt->execute(array($p['name'],$p['address'],$p['email'],$idd));
-		$response = $stmt->fetch();  
+    if($stmt = $this->db->prepare($sql)) {
+			$stmt->execute(array($p['name'],$p['address'],$p['new_email'],$p['id_user']));
+			$response = $stmt->fetch();  
+		}
+		else {
+       $_SESSION['error']=6;
+			 return;
+		}
 
 	}
 
