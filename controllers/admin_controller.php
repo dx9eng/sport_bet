@@ -55,53 +55,41 @@ class admin {
 	public function editResult($params) {
 		global $errors;
 		$_SESSION['error'] = NULL;
-    //$result = NULL;
+    $result = NULL;
 
 		// Instantiate match model
 		include_once 'models/match_model.php'; 
-		$match_model = new match;
+    $match_model = new match;
 
-    $matches = $match_model->getUnfinished();
-    include 'views/admin_edit_result.php';
+    if (isset($_SESSION['admin'])) {
+      if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['SubmitResults'] == 'Save Results') {
+        $ress = $_POST['ress'];
+        for ($i = 0; $i < $ress; $i++) {
+          $id_match = mysql_real_escape_string($_POST['match_id_' . $i]);
+          $score_team1 = mysql_real_escape_string($_POST['score_team1_' . $i]);
+          $score_team2 = mysql_real_escape_string($_POST['score_team2_' . $i]);
 
-    $ress = count((array)$matches);
-    print_r($ress); //die;
-
-		// Retrieve the match
-		if (isset($_SESSION['admin'])) {
-			if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['SubmitResults'] == 'Save Results') {
-				$score_team1 = mysql_real_escape_string($_POST['score_team1']);
-				$score_team2 = mysql_real_escape_string($_POST['score_team2']);
-        print_r(' '. $score_team1 .' '. $score_team2);
-				//$result = mysql_real_escape_string($_POST['result']);
-				//$id_match = $_POST['id_match'];
-				//print_r($score_team1); die;
-				if (!is_numeric($score_team1)) {
-					$_SESSION['error'] = 'Invalid score for first team';
-          print_r(' '.$_SESSION['error']);
-				}
-				elseif (!is_numeric($score_team2)) {
-					$_SESSION['error'] = 'Invalid score for second team';
-          print_r(' '.$_SESSION['error']);
-				}
-				elseif (is_numeric($score_team1) && is_numeric($score_team2)) {
-					if ($score_team1  == $score_team2) {
-						$result = 'x';
-            print_r(' '.$result);
-					}
-					elseif ($score_team1  > $score_team2) {
-						$result = '1';
-            print_r(' '.$result);
-					}
-					elseif ($score_team1  < $score_team2) {
-						$result = '2';
-            print_r(' '.$result);
-					}
-					// print_r($match_model); die;
-					$matches = $match_model->editMatchResults($score_team1, $score_team2, $result);
-				}
-			}
-		}
+          if ((isset($score_team1) && $score_team1 != NULL) && (isset($score_team2) && $score_team2 != NULL)) {
+            if ($score_team1  == $score_team2) {
+              $result = 'x';
+            }
+            elseif ($score_team1  > $score_team2) {
+              $result = '1';
+            }
+            elseif ($score_team1  < $score_team2) {
+              $result = '2';
+            }
+            $matches = $match_model->editMatchResults($score_team1, $score_team2, $result, $id_match);
+            header('Location: /sport_bet/admin/editResult/');
+          }
+        }
+      }
+      else {
+        $matches = $match_model->getUnfinished();
+        $ress = count((array)$matches);
+        include 'views/admin_edit_result.php';
+      }
+    }
 		elseif (isset($_SESSION['user'])) {
 			header('Location: /sport_bet/user/');
 		}
@@ -174,4 +162,25 @@ class admin {
 			header('Location: /sport_bet/home/');
 		}
 	}
+
+  public function delUser($params) {
+
+    // Instantiate user
+    include_once 'models/user_model.php';
+    $user_model = new UserModel;
+
+    if (isset($_SESSION['admin'])) {
+
+      $users_list = $user_model->getAllUsers();
+      
+      include 'views/admin_del_user.php';
+    }
+    elseif (isset($_SESSION['user'])) {
+      header('Location: /sport_bet/user/');
+    }
+    else {
+      header('Location: /sport_bet/home/');
+    }
+
+  }
 }

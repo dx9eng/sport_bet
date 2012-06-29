@@ -34,7 +34,7 @@ color: #fff;
 cursor:url("/sport_bet/inc/spo61.cur"), pointer;
 }
 
-#res {
+.res {
     width: 15px;
     padding: 1px 1px;
 }

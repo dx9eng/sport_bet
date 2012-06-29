@@ -8,22 +8,29 @@
 
 <div id="match-result">
   <?php
-    if (!empty($matches)) {
-      foreach ($matches as $m) :
+    if (!empty($matches)) {      
+      //for ($i = 0; $i < $ress; $i++) {
+        //
+      //}
+      foreach ($matches as $key => $m) :
+        //$temp = count($m['id_match']);
     ?>
   <form name="form1" method="post" action="/sport_bet/admin/editResult/">
   <table>
     <tr>
+      <input type="hidden" name="ress" value="<?php echo $ress; ?>" />
+      <input type="hidden" name="match_id_<?php echo $key; ?>" value="<?php echo $m['id_match']; ?>" />
       <td id="td-d">
+        <?php print_r($key); //echo $temp; ?>
         <?php $format = "d-m-Y H:i"; echo $t = date($format, strtotime($m['match_day'])); ?>
       </td>
       <th id="td-m">
         <?php echo $m['team1'] . " vs. " . $m['team2']; ?>
       </th>
       <td id="td-r">
-        <input name="score_team1" type="text" id="res">
+        <input name="score_team1_<?php echo $key; ?>" type="text" class="res">
         <?php echo ' - '; ?>
-        <input name="score_team2" type="text" id="res">
+        <input name="score_team2_<?php echo $key; ?>" type="text" class="res">
       </td>
     </tr>
   </table>
@@ -36,6 +43,7 @@
     
     <td>
       <?php
+        echo "Count: ".$ress."  ";
         if (isset($_SESSION['error'])) {
           echo $_SESSION['error'];
         }

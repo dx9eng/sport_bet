@@ -36,7 +36,8 @@ class match {
 		while ($row = $stmt->fetch()) {
 			$e[] = $row;
 		}
-		// print_r($row); die;
+    //$temp = mysql_num_fields($stmt);
+		//print_r($temp); die;
 		return $e;
 	}
 
@@ -58,8 +59,9 @@ class match {
 		}
 	}
 
-public function editMatchResults($score_team1, $score_team2, $result) {
-		$sql = "UPDATE matches SET score_team1=?, score_team2=?, result=? WHERE id_match=?;";
+public function editMatchResults($score_team1, $score_team2, $result, $id_match) {
+
+		$sql = "UPDATE matches SET score_team1=?, score_team2=?, result=? WHERE id_match=?";
 		if ($stmt = $this->db->prepare($sql)) {
 			$stmt->execute(array($score_team1, $score_team2, $result, $id_match));
 			$stmt->closeCursor();
