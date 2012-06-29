@@ -179,3 +179,11 @@ table {
     table-layout: fixed;
     margin: 0px 0px 0px 0px;
 }
+
+#am {
+    width: 400px;
+    border: 0px;
+    text-align: center;
+    table-layout: fixed;
+    margin: 10px 0px 0px 180px;
+}

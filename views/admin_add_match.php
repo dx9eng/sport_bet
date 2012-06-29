@@ -16,7 +16,7 @@
 	<!-- Add match form -->
 	<div>
 		<form name="form2" method="post" action="/sport_bet/admin/addMatch/">
-			<table>
+			<table class="am" id="am">
 				<tr>
 					<td>First Team</td>
 					<td><input name="team1" type="text" id="team1"></td>
@@ -30,10 +30,10 @@
 					<td><input name="match_day" type="text" id="match_day" class="calendarFocus"></td>
 				</tr>
 				<tr>
-					<td>
+					<td><td>
 						<input type="submit" name="Submit" value="Add Match">
 						<input type="reset" name="Cancel" value="Cancel">
-					</td>
+					</td></td>
 				</tr>
 			</table>
 		</form>
