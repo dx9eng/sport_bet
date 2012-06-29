@@ -166,6 +166,30 @@ class UserModel {
 			return;
 		}
 	}
+
+  public function getAllUsers() {
+    // Load all matches
+    $sql = "SELECT * FROM users";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute(array('users'));
+
+    $e = NULL;
+
+    while ($row = $stmt->fetch()) {
+      $e[] = $row;
+    }
+
+    return $e;
+  }
+
+  public function deleteUser() {
+    $sql = "DELETE FROM user WHERE email = ?";
+    if ($stmt = $this->db->prepare($sql)) {
+      $stmt->execute(array($email));
+      $delete = $stmt->fetch();
+      return $delete;
+    }
+  }
 }
 
 ?>

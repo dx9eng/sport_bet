@@ -7,6 +7,7 @@
 			<li><a href='/sport_bet/admin/addMatch/'><span>Add Matches</span></a></li>
 			<li><a href='/sport_bet/admin/editResult/'><span>Edit Results</span></a></li>
 			<li><a href='/sport_bet/admin/addUser/'><span>Add Users</span></a></li>
+      <li><a href='/sport_bet/admin/delUser/'><span>Delete User</span></a></li>
 			<?php
 		}
 		elseif (isset($_SESSION['user'])) {
