@@ -8,7 +8,7 @@ class admin {
 		include_once 'models/match_model.php'; 
 		$match_model = new match;
 		
-		// Retrieve list of entries
+		// Retrieve list of matches
 		$matches = $match_model->getAllMatches();
 		
 		// Include view
@@ -24,10 +24,11 @@ class admin {
 	}
 
 	public function addMatch($params) {
-		global $errors;
+		
+    global $errors;
 		$_SESSION['error'] = NULL;
 
-		// Instantiate user model
+		// Instantiate match model
 		include_once 'models/match_model.php';
 		$match_model = new match;
 
@@ -53,7 +54,8 @@ class admin {
 	}
 
 	public function editResult($params) {
-		global $errors;
+		
+    global $errors;
 		$_SESSION['error'] = NULL;
     $result = NULL;
 
@@ -68,19 +70,24 @@ class admin {
           $id_match = mysql_real_escape_string($_POST['match_id_' . $i]);
           $score_team1 = mysql_real_escape_string($_POST['score_team1_' . $i]);
           $score_team2 = mysql_real_escape_string($_POST['score_team2_' . $i]);
-
-          if ((isset($score_team1) && $score_team1 != NULL) && (isset($score_team2) && $score_team2 != NULL)) {
-            if ($score_team1  == $score_team2) {
-              $result = 'x';
+          if (isset($score_team1) && isset($score_team2)) {
+            if (is_numeric($score_team1) && is_numeric($score_team2)) {
+              if ($score_team1  == $score_team2) {
+                $result = 'x';
+              }
+              elseif ($score_team1  > $score_team2) {
+                $result = '1';
+              }
+              elseif ($score_team1  < $score_team2) {
+                $result = '2';
+              }
+              $matches = $match_model->editMatchResults($score_team1, $score_team2, $result, $id_match);
+              header('Location: /sport_bet/admin/editResult/');
             }
-            elseif ($score_team1  > $score_team2) {
-              $result = '1';
+            elseif (!is_numeric($score_team1) || !is_numeric($score_team2)) {
+              header('Location: /sport_bet/admin/editResult/');
+              $_SESSION['error'] = 'Invalid score.';
             }
-            elseif ($score_team1  < $score_team2) {
-              $result = '2';
-            }
-            $matches = $match_model->editMatchResults($score_team1, $score_team2, $result, $id_match);
-            header('Location: /sport_bet/admin/editResult/');
           }
         }
       }
@@ -108,7 +115,7 @@ class admin {
 		$user_model = new UserModel;
 
 		if (isset($_SESSION['admin'])) {
-			// check all fields have been posted
+			// check if all fields have been posted
 			if (!isset($_POST['name'], $_POST['email'], $_POST['password'])) {
 				$_SESSION['error'] = 'All fields must be completed';
 			}
@@ -127,7 +134,7 @@ class admin {
 			elseif (strlen($_POST['email']) > 45) {
 				$_SESSION['error'] = 'Too long email';
 			}
-			// check for email valid email address
+			// check for valid email address
 			elseif (!preg_match("/^\S+@[\w\d.-]{2,}\.[\w]{2,6}$/iU", $_POST['email'])) {
 				$_SESSION['error'] = 'Invalid Email';
 			}
@@ -154,7 +161,6 @@ class admin {
 			}
 			include 'views/admin_add_user.php';
 		}
-
 		elseif (isset($_SESSION['user'])) {
 			header('Location: /sport_bet/user/');
 		}
@@ -170,9 +176,13 @@ class admin {
     $user_model = new UserModel;
 
     if (isset($_SESSION['admin'])) {
-
+      if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['Submit'] == 'Delete User') {
+        
+      }
       $users_list = $user_model->getAllUsers();
-      
+
+
+
       include 'views/admin_del_user.php';
     }
     elseif (isset($_SESSION['user'])) {
