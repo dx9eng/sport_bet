@@ -3,25 +3,19 @@
 
 <!-- content -->
 <p><h1>Edit Match Results</h1></p>
-<!-- Edit Match form-->
 <link rel="stylesheet" type="text/css" href="/sport_bet/css/table.css" />
-
 <div id="match-result">
   <?php
-    if (!empty($matches)) {      
-      //for ($i = 0; $i < $ress; $i++) {
-        //
-      //}
+    if (!empty($matches)) {
       foreach ($matches as $key => $m) :
-        //$temp = count($m['id_match']);
-    ?>
+  ?>
   <form name="form1" method="post" action="/sport_bet/admin/editResult/">
   <table>
     <tr>
       <input type="hidden" name="ress" value="<?php echo $ress; ?>" />
       <input type="hidden" name="match_id_<?php echo $key; ?>" value="<?php echo $m['id_match']; ?>" />
       <td id="td-d">
-        <?php print_r($key); //echo $temp; ?>
+        <?php // echo $key; ?>
         <?php $format = "d-m-Y H:i"; echo $t = date($format, strtotime($m['match_day'])); ?>
       </td>
       <th id="td-m">
@@ -34,35 +28,31 @@
       </td>
     </tr>
   </table>
-<?php
-  endforeach;
-}
-?>
-<table>
-  <tr>
-    
-    <td>
-      <?php
-        echo "Count: ".$ress."  ";
-        if (isset($_SESSION['error'])) {
-          echo $_SESSION['error'];
-        }
-        else {
-          echo "...";
-        }
+  <?php
+    endforeach;
+  }
+  ?>
+  <table>
+    <tr>
+      <td>
+        <?php
+          // echo "Count: ".$ress."  ";
+          if (isset($_SESSION['error'])) {
+            echo $_SESSION['error'];
+          }
+          else {
+            echo "...";
+          }
         ?>
-    </td>
-    <td></td>
-    <td><input type="reset" name="Reset" value="Clear Results"></td>
-    <td></td>
-    <td><input type="submit" name="SubmitResults" value="Save Results"></td>
-  </tr>
-</table>
-</form>
-
+      </td>
+      <td></td>
+      <td><input type="reset" name="Reset" value="Clear Results"></td>
+      <td></td>
+      <td><input type="submit" name="SubmitResults" value="Save Results"></td>
+    </tr>
+  </table>
+  </form>
 </div>
-
-
 <!-- content end -->
 
 <!-- bottom -->

@@ -169,9 +169,9 @@ class UserModel {
 
   public function getAllUsers() {
     // Load all matches
-    $sql = "SELECT * FROM users";
+    $sql = "SELECT * FROM user WHERE account_type != '0'";
     $stmt = $this->db->prepare($sql);
-    $stmt->execute(array('users'));
+    $stmt->execute(array('user'));
 
     $e = NULL;
 
